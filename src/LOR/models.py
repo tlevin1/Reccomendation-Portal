@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 class LOR(models.Model):
     name = models.CharField(max_length=100)
-    requester = models.CharField(max_length=100)
+    requester = models.EmailField(max_length=100)
     request_date = models.DateField()
     position = models.CharField(max_length=100)
     due_date = models.DateField()
