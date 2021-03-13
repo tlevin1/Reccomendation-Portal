@@ -18,3 +18,6 @@ class LOR(models.Model):
     resume = models.TextField()
     transcript = models.TextField()
     additional_info = models.TextField()
+
+    def __str__(self):
+        return str(self.requester) + " " + str(self.writer) + " " + str(self.status) + " " + str(self.due_date)
