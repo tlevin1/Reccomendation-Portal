@@ -4,9 +4,6 @@ from .models import LOR
 
 # Create your tests here.
 class LORModelTest(TestCase):
-    def test_to_string(self):
-        self.fail("Test Incomplete")
-
     def test_good_to_string(self):
         lor = LOR(requester_email="j@umbc.edu", writer_email="k@umbc.edu", status="pending", due_date="2021-01-01",
                   position="developer")
