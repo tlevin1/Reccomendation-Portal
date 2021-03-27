@@ -30,6 +30,13 @@
 <body>
 <h1 style="text-align: center;font-size:300%;">Writer Dashboard</h1>
 
+<form action="" method="POST">{% csrf_token %}
+
+<button type="submit" name="Accept" value="Accept"><b>Accept</b></button>
+<button type="submit" name="Deny" value="Deny"><b>Deny</b></button>
+<button type="submit" name="Review" value="Review"><b>Review</b></button>
+<button type="submit" name="Complete" value="Complete"><b>Complete</b></button>
+
 <table>
     <tr>
         <th style="width:2%"></th>
@@ -40,7 +47,7 @@
         <th>Requested On</th>
         <th>Position</th>
     </tr>
-    {% for lor in lors %}
+    {% for lor in sorted_lors %}
     <tr>
         <td>
             <label><input type="checkbox" name="sel_box" value="{{ lor.id }}"/>
@@ -67,5 +74,6 @@
     </tr>
     {% endfor %}
 </table>
+</form>
 </body>
 </html>

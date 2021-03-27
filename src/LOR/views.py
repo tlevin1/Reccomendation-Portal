@@ -12,7 +12,8 @@ def index(request):
 # actions are: accept, deny, review, complete
 def writer_view(request):
     print(request.method)
-    lors = LOR.objects.all()
-    context = {"lors": lors}
+    sorted_lors = LOR.objects.all().order_by("due_date")
+    context = {"sorted_lors": sorted_lors}
     return render(request, 'writer_view.html', context)
+
 

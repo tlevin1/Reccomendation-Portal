@@ -46,4 +46,16 @@ class AuthorListViewTest(TestCase):
     def test_view_has_all_data(self):
         response = self.client.get(reverse('writer_view'))
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(len(response.context['lors']) == 3)
+        self.assertTrue(len(response.context['sorted_lors']) == 3)
+
+    def test_view_has_writer_has_sorted_data(self):
+        response = self.client.get(reverse('writer_view'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(len(response.context['sorted_lors']) == 3)
+        last_date = 0
+        for lor in response.context['sorted_lors']:
+            if last_date == 0:
+                last_date = lor.due_date
+            else:
+                self.assertTrue(last_date <= lor.due_date)
+                last_date = lor.due_date
