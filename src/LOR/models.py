@@ -10,7 +10,7 @@ class LOR(models.Model):
     due_date = models.DateField()
     writer_email = models.EmailField()
     company_name = models.CharField(max_length=100)
-    company_website = models.CharField(max_length=100)
+    company_website = models.URLField()
     company_email = models.EmailField()
     company_recipients = models.CharField(max_length=200)
     status = models.CharField(max_length=20)
