@@ -1,10 +1,11 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 from .models import LOR
 
 
-class AuthorListViewTest(TestCase):
+class WriterViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
@@ -30,28 +31,52 @@ class AuthorListViewTest(TestCase):
                            company_recipients='Attn: Ronald Menser', status='pending', cv='tbd',
                            resume='tbd', transcript='tbd', additional_info='none')
 
+        # create two users
+        w_user1 = User.objects.create_user(username='w_user1', email='w1@umbc.edu', password='justapwd12')
+        w_user3 = User.objects.create_user(username='w_user3', email='w3@umbc.edu', password='justapwd12')
+
+        w_user1.save()
+        w_user3.save()
+
     def test_view_url_is_at_correct_location(self):
+        # Log in the first writer
+        login = self.client.login(username='w_user1', password='justapwd12')
         response = self.client.get('/writer/')
         self.assertEqual(response.status_code, 200)
 
+    def test_view_url_redirects_to_home(self):
+        # Check redirects to home page if no one is logged in
+        response = self.client.get('/writer/')
+        self.assertEqual(response.status_code, 302)
+
     def test_view_url_is_accessible_by_name(self):
+        # Log in the first writer
+        login = self.client.login(username='w_user1', password='justapwd12')
         response = self.client.get(reverse('writer_view'))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
+        # Log in the first writer
+        login = self.client.login(username='w_user1', password='justapwd12')
         response = self.client.get(reverse('writer_view'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'writer_view.html')
 
-    def test_view_has_all_data(self):
+    def test_view_has_writer_specific_sorted_data(self):
+        # Log in the first writer
+        login = self.client.login(username='w_user1', password='justapwd12')
         response = self.client.get(reverse('writer_view'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(len(response.context['sorted_lors']) == 3)
 
-    def test_view_has_writer_has_sorted_data(self):
-        response = self.client.get(reverse('writer_view'))
+        # Check that our writer is logged in
+        self.assertEqual(str(response.context['user']), 'w_user1')
+
+        # Check that we got a response "success"
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(len(response.context['sorted_lors']) == 3)
+
+        # Check that we got two requests for the writer
+        self.assertTrue(len(response.context['sorted_lors']) == 2)
+
+        # Check that the requests are in sorted order by due date
         last_date = 0
         for lor in response.context['sorted_lors']:
             if last_date == 0:
