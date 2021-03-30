@@ -8,19 +8,19 @@ class LORRoleModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        LorUser.objects.create(first_name='admin', email='adminperson@umbc.edu', role='AD', position="student")
-        LorUser.objects.create(name_title='Dr', first_name='Harriet', last_name='Tubman', email='htubman@umbc.edu', role='WR', position="abolitionist")
-        LorUser.objects.create(name_title='Dr', first_name='Katherine', last_name='Johnson', email='kjohnson@umbc.edu', role='WR', position="mathematician")
-        LorUser.objects.create(first_name='Bob', email='bob@umbc.edu', role='RQ', position="student")
-        LorUser.objects.create(first_name='John', email='john@umbc.edu', role='RQ', position="alumni")
+        LorUser.objects.create(first_name='admin', email='adminperson@umbc.edu', role=UserRoles.ADMIN, position="student")
+        LorUser.objects.create(name_title='Dr', first_name='Harriet', last_name='Tubman', email='htubman@umbc.edu', role=UserRoles.WRITER, position="abolitionist")
+        LorUser.objects.create(name_title='Dr', first_name='Katherine', last_name='Johnson', email='kjohnson@umbc.edu', role=UserRoles.WRITER, position="mathematician")
+        LorUser.objects.create(first_name='Bob', email='bob@umbc.edu', role=UserRoles.REQUESTER, position="student")
+        LorUser.objects.create(first_name='John', email='john@umbc.edu', role=UserRoles.REQUESTER, position="alumni")
 
     def test_users_exist(self):
         admin = LorUser.objects.get(email='adminperson@umbc.edu')
         writer = LorUser.objects.get(email='htubman@umbc.edu')
         requester = LorUser.objects.get(email='john@umbc.edu')
-        self.assertEqual(str(admin.role), "AD")
+        self.assertEqual(admin.role, UserRoles.ADMIN)
         self.assertEqual(str(writer.first_name), "Harriet")
-        self.assertEqual(str(requester.role), "RQ")
+        self.assertEqual(requester.role, UserRoles.REQUESTER)
 
     def test_add_requests(self):
         writer = LorUser.objects.get(email='kjohnson@umbc.edu')
@@ -50,20 +50,20 @@ class LORRoleModelTest(TestCase):
 
         LorDocument.objects.create(
             document_name = 'it certification',
-            document_type = 'AI',
+            document_type = DocumentTypes.ADDITIONALINFO,
             request_document = "https://drive.google.com/1234",
             request = bobs_request
         )
         LorDocument.objects.create(
             document_name='my frontend resume',
-            document_type = 'RE',
+            document_type = DocumentTypes.RESUME,
             request_document = "https://drive.google.com/5678",
             request = bobs_request
         )
 
         bobs_request_documents = LorDocument.objects.filter(request = bobs_request)
 
-        self.assertEqual(bobs_request_documents[0].document_type, 'AI')
+        self.assertEqual(bobs_request_documents[0].document_type, DocumentTypes.ADDITIONALINFO)
         self.assertEqual(bobs_request_documents[1].request_document, "https://drive.google.com/5678")
 
     def test_add_recipients(self):

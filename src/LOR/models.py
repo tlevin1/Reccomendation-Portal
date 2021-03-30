@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as gettextlazy
 
 '''
     User Roles
@@ -11,9 +12,22 @@ from django.db import models
     Document Types
     RE RESUME
     TR TRANSCRIPT
-    CV CV
-    AI ADDITIONAL INFO
+    CV COVERLETTER
+    AI ADDITIONALINFO
 '''
+
+
+class UserRoles(models.TextChoices):
+    ADMIN = 'AD', gettextlazy('Admin')
+    WRITER = 'WR', gettextlazy('Writer')
+    REQUESTER = 'RQ', gettextlazy('Requester')
+
+
+class DocumentTypes(models.TextChoices):
+    RESUME = 'RE', gettextlazy('Resume')
+    TRANSCRIPT = 'TR', gettextlazy('Transcript')
+    COVERLETTER = 'CV', gettextlazy('CoverLetter')
+    ADDITIONALINFO = 'AI', gettextlazy('AdditionalInfo')
 
 
 class LorUser(models.Model):
@@ -21,7 +35,8 @@ class LorUser(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     name_title = models.CharField(max_length=25)
-    role = models.CharField(max_length=2)
+    role = models.CharField(max_length=2,choices=UserRoles.choices,
+                            default=UserRoles.REQUESTER)
     position = models.CharField(max_length=100)
 
 
@@ -43,7 +58,8 @@ class LorCompanyRecipient(models.Model):
 
 class LorDocument(models.Model):
     document_name = models.CharField(max_length=100)
-    document_type = models.CharField(max_length=2)
+    document_type = models.CharField(max_length=2,choices=DocumentTypes.choices,
+                                     default=DocumentTypes.ADDITIONALINFO)
     request_document = models.TextField()
     request = models.ForeignKey(LorRequest, related_name="related_document_request_id", on_delete=models.CASCADE)
 
