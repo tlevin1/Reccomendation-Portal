@@ -24,6 +24,7 @@ class RequestModel(models.Model):
     position = models.CharField(max_length=100, blank=True, null=True)
     due_date = models.DateField(max_length=100, blank=False, null=False)
     writer_name = models.CharField(max_length=100, blank=False, null=False, choices=Proffesors)
+    writer_email = models.EmailField(max_length=200, blank=True, null=True)
     company_name = models.CharField(max_length=100, blank=False, null=False, default= "")
     company_website = models.URLField(max_length=100, blank=True, null=True)
     company_email = models.EmailField(max_length=100, blank=True, null=True)

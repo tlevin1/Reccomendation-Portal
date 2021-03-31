@@ -14,6 +14,7 @@ class RequestForm(forms.ModelForm):
             'position',
             'due_date',
             'writer_name',
+            'writer_email',
             'company_name',
             'company_website',
             'company_email',
