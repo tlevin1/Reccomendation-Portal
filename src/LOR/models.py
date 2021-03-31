@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 class LOR(models.Model):
     requester = models.CharField(max_length=100)
