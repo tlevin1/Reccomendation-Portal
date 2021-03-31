@@ -15,7 +15,6 @@ Status = [
     ("Finish", "Finish")
 ]
 
-
 # Create your models here.
 class RequestModel(models.Model):
     requester = models.CharField(max_length=100, blank=False, null=False, default="")
