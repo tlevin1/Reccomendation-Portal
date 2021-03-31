@@ -60,7 +60,7 @@ class WriterViewTest(TestCase):
         login = self.client.login(username='w_user1', password='justapwd12')
         response = self.client.get(reverse('writer_view'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'writer_view.html')
+        self.assertTemplateUsed(response, 'writer_review.html')
 
     def test_view_has_writer_specific_sorted_data(self):
         # Log in the first writer
