@@ -29,9 +29,3 @@ class RequestForm(forms.ModelForm):
             'transcript': 'Please put your transcript URL into this box',
         }
 
-    def clean_requester_email(self):
-        email = self.cleaned_data.get('requester_email')
-        if "@umbc.edu" in email:
-            return email
-        else:
-            raise forms.ValidationError("You must use your umbc email!", code="Invalid")
