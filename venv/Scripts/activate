@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\DinhMenh\PycharmProjects\CMSC441Letter\venv"
+VIRTUAL_ENV="C:\Users\Tehila\Desktop\Reccomendation-Portal\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -4,40 +4,40 @@ from .models import LOR
 
 
 # stub for home page
-def index(request):
-    return HttpResponse('Letters of Recommendation index')
+def index(writer):
+    return HttpResponse('Requests')
 
 
 # display table of writer actions
 # actions are: accept, deny, review, complete
-def writer_view(request):
-    print(request.method)
-    cur_user = request.user
+def writer_view(writer):
+    print(writer.method)
+    cur_user = writer.user
     print(cur_user)
     print("User is ", cur_user)
 
     # Make sure user is logged in
     if cur_user.is_authenticated:
         print("User is logged in")
-        if request.method == 'POST':
+        if writer.method == 'POST':
             # Get the list of ids associated with selected table rows
-            if not request.POST.getlist('sel_box'):
+            if not writer.POST.getlist('sel_box'):
                 # messages.info(request, 'Nothing Selected')
                 print('Nothing selected')
             else:
-                sel_ids = request.POST.getlist('sel_box')
+                sel_ids = writer.POST.getlist('sel_box')
                 # Check which button is pressed
-                if 'Accept' in request.POST:
-                    print('Accept Button pressed')
-                elif 'Deny' in request.POST:
-                    print('Deny Button pressed')
-                elif 'Complete' in request.POST:
-                    print('Complete Button pressed')
-                elif 'Review' in request.POST:
+                if 'Cover Letter' in writer.POST:
+                    print('Cover Letter Button pressed')
+                elif 'Resume' in writer.POST:
+                    print('Resume Button pressed')
+                elif 'Unnoficial Transcript' in writer.POST:
+                    print('Unnoficial Transcript Button pressed')
+                elif 'Additional Information' in writer.POST:
                     print('Review Button pressed')
         sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
         context = {"sorted_lors": sorted_lors}
-        return render(request, 'writer_view.html', context)
+        return render(writer, 'writer_view.html', context)
     else:
         # If no one is logged in, send back to home page
         return redirect('/')
