@@ -1,8 +1,7 @@
 from django.contrib import admin
 from .models import *
-from django.contrib.auth.models import User
 
-#add sample users
+#LorUser.objects.get_or_create(username='test1',password=None,email='testp1@umbc.edu')
 
 # Register your models here.
 admin.site.register(LorUser)

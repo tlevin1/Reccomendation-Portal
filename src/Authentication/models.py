@@ -1,6 +1,6 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as gettextlazy
-from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractUser
 
 '''
     User Roles
@@ -19,28 +19,23 @@ from django.contrib.auth.models import User
 
 
 class UserRoles(models.TextChoices):
-    ADMIN = 'AD', gettextlazy('Admin')
-    WRITER = 'WR', gettextlazy('Writer')
-    REQUESTER = 'RQ', gettextlazy('Requester')
+    ADMIN = 'AD', _('Admin')
+    WRITER = 'WR', _('Writer')
+    REQUESTER = 'RQ', _('Requester')
 
 
 class DocumentTypes(models.TextChoices):
-    RESUME = 'RE', gettextlazy('Resume')
-    TRANSCRIPT = 'TR', gettextlazy('Transcript')
-    COVERLETTER = 'CV', gettextlazy('CoverLetter')
-    ADDITIONALINFO = 'AI', gettextlazy('AdditionalInfo')
+    RESUME = 'RE', _('Resume')
+    TRANSCRIPT = 'TR', _('Transcript')
+    COVERLETTER = 'CV', _('CoverLetter')
+    ADDITIONALINFO = 'AI', _('AdditionalInfo')
 
 
-class LorUser(models.Model):
-    base_user = models.ForeignKey(User,related_name="related_baseuser_id",
-                                  unique=True,on_delete=models.CASCADE);
-    email = models.EmailField(max_length=100)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    name_title = models.CharField(max_length=25)
-    role = models.CharField(max_length=2,choices=UserRoles.choices,
-                            default=UserRoles.REQUESTER, )
-    position = models.CharField(max_length=100)
+class LorUser(AbstractUser):
+    name_title = models.CharField(max_length=25,null=True,blank=True)
+    role = models.CharField(max_length=2,choices=UserRoles.choices,default=UserRoles.REQUESTER)
+    position = models.CharField(max_length=100,null=True, blank=True)
+    password = models.CharField(_('password'),max_length=128,null=True,blank=True)
 
 
 class LorRequest(models.Model):

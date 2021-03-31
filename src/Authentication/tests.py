@@ -2,6 +2,7 @@ from django.test import TestCase
 from datetime import datetime, timedelta
 from .models import *
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
 class LORRoleModelTest(TestCase):
     date_now = datetime.now()
@@ -9,16 +10,11 @@ class LORRoleModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        test_user1 = User.objects.create_user(username='testuser1', password='12345')
-        test_user2 = User.objects.create_user(username='testuser2', password='12345')
-        test_user3 = User.objects.create_user(username='testuser3', password='12345')
-        test_user4 = User.objects.create_user(username='testuser4', password='12345')
-        test_user5 = User.objects.create_user(username='testuser5', password='12345')
-        LorUser.objects.create(base_user=test_user1, first_name='admin', email='adminperson@umbc.edu', role=UserRoles.ADMIN, position="student")
-        LorUser.objects.create(base_user=test_user2,name_title='Dr', first_name='Harriet', last_name='Tubman', email='htubman@umbc.edu', role=UserRoles.WRITER, position="abolitionist")
-        LorUser.objects.create(base_user=test_user3,name_title='Dr', first_name='Katherine', last_name='Johnson', email='kjohnson@umbc.edu', role=UserRoles.WRITER, position="mathematician")
-        LorUser.objects.create(base_user=test_user4,first_name='Bob', email='bob@umbc.edu', role=UserRoles.REQUESTER, position="student")
-        LorUser.objects.create(base_user=test_user5,first_name='John', email='john@umbc.edu', role=UserRoles.REQUESTER, position="alumni")
+        LorUser.objects.create(username='testuser1',first_name='admin', email='adminperson@umbc.edu', role=UserRoles.ADMIN, position="student")
+        LorUser.objects.create(username='testuser2',name_title='Dr', first_name='Harriet', last_name='Tubman', email='htubman@umbc.edu', role=UserRoles.WRITER, position="abolitionist")
+        LorUser.objects.create(username='testuser3',name_title='Dr', first_name='Katherine', last_name='Johnson', email='kjohnson@umbc.edu', role=UserRoles.WRITER, position="mathematician")
+        LorUser.objects.create(username='testuser4',first_name='Bob', email='bob@umbc.edu', role=UserRoles.REQUESTER, position="student")
+        LorUser.objects.create(username='testuser5',first_name='John', email='john@umbc.edu', role=UserRoles.REQUESTER, position="alumni")
 
     def test_users_exist(self):
         admin = LorUser.objects.get(email='adminperson@umbc.edu')
