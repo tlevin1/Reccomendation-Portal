@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as gettextlazy
+from django.contrib.auth.models import User
 
 '''
     User Roles
@@ -31,12 +32,14 @@ class DocumentTypes(models.TextChoices):
 
 
 class LorUser(models.Model):
+    base_user = models.ForeignKey(User,related_name="related_baseuser_id",
+                                  unique=True,on_delete=models.CASCADE);
     email = models.EmailField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     name_title = models.CharField(max_length=25)
     role = models.CharField(max_length=2,choices=UserRoles.choices,
-                            default=UserRoles.REQUESTER)
+                            default=UserRoles.REQUESTER, )
     position = models.CharField(max_length=100)
 
 
