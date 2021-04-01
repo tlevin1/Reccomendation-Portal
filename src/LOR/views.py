@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import LOR
+from django import http
+from . import models
+from . import form
+
 
 
 # stub for home page
@@ -43,3 +47,25 @@ def writer_view(request):
 # else:
     # If no one is logged in, send back to home page
     # return redirect('/')
+
+# Create your views here.
+'''
+def view_enter_request(request):
+    obj = models.Request_Form.objects.get(id=1)
+    request_form = {
+        "object" : obj
+    }
+    return render(request,"LOR/enter_request.html", request_form);
+'''
+
+
+def view_enter_request(request):
+    obj = form.RequestForm(request.POST or None)
+    if obj.is_valid():
+        obj.save()
+        return http.HttpResponseRedirect('/')
+
+    request_form = {
+        "object": obj
+    }
+    return render(request,"LOR/enter_request.html", request_form);
