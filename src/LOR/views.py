@@ -42,7 +42,7 @@ def writer_view(writerrev):
                     print('Next Button pressed')
         sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
         context = {"sorted_lors": sorted_lors}
-        return render(writerrev, 'writer_view.html', context)
+        return render(writerrev, 'LOR/writer_view.html', context)
         #return render(writerrev, 'writer_review.html', context)
     else:
         # If no one is logged in, send back to home page
