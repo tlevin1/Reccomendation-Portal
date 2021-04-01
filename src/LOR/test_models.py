@@ -2,6 +2,7 @@ from django.test import TestCase
 from .models import LOR
 
 
+
 # Create your tests here.
 class LORModelTest(TestCase):
     @classmethod
