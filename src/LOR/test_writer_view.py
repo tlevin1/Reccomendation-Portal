@@ -1,9 +1,9 @@
-from django.test import TestCase
-from django.urls import reverse
+from django.test import TestCase, Client
+from django.urls import reverse, resolve
 from django.contrib.auth.models import User
-
-from .models import LOR
-
+from datetime import datetime
+from .models import LOR, Req_a
+from .views import writer_req
 
 class WriterViewTest(TestCase):
 
@@ -84,3 +84,40 @@ class WriterViewTest(TestCase):
             else:
                 self.assertTrue(last_date <= lor.due_date)
                 last_date = lor.due_date
+class TestViews(TestCase):
+
+
+    def test_project_Req(self):
+        self.client = Client()
+        self.req_url = reverse('writer_req')
+
+        response = self.client.get(reverse('writer_req'))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'LOR/requests.html')
+    #testing to see if there is a 200 response
+    def test_project_accept_post(self):
+        self.req = Req_a.objects.create(
+        name= 'thuan',
+        answer = '',
+        R_date = '2001-02-12',
+        A_date = datetime.now()
+        )
+
+        response = self.client.post(reverse('writer_req'), {
+            'name' : 'thuan',
+            'answer' : '',
+            'R_date' : '2001-05-03',
+            'A_date' : '2000-03-21'
+        })
+        self.assertEquals(response.status_code, 200)
+        #testing to see if Post was succesful
+        self.assertEquals(self.req.name, 'thuan')
+        #testing to see if variable are still correct
+
+class TestURL(TestCase):
+
+    def test_requests_url(self):
+        url = reverse('writer_req')
+        print((resolve(url)))
+        self.assertEqual(resolve(url).func, writer_req)
+        #test to see if it is correct url

@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .models import LOR
+from .models import LOR, Req_a
+from datetime import datetime
 from django import http
 from . import models
 from . import form
@@ -69,3 +70,18 @@ def view_enter_request(request):
         "object": obj
     }
     return render(request,"LOR/enter_request.html", request_form);
+
+def writer_req(request):
+    #form = ReqForm()
+
+    answer = Req_a.objects.all()
+    if request.method == 'POST':
+            req = Req_a.objects.get(name=request.POST.get('name'))
+            if(request.POST.get('status')):
+                #if there is post resquest, copy information
+                req.answer = request.POST.get('status')
+                req.A_date = datetime.now()
+                req.save()
+        #save into database
+
+    return render(request, 'LOR/requests.html', {'answers': answer})
