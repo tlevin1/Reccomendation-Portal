@@ -7,6 +7,7 @@ from . import models
 from . import form
 
 
+
 # stub for home page
 def index(request):
     return HttpResponse('Letters of Recommendation index')

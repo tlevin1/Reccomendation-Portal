@@ -2,24 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="076d4416-8162-4cce-9cbe-e1e370322afa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/LOR/migrations/0002_auto_20210331_2046.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/LOR/migrations/0003_lor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CMSC441Letter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CMSC441Letter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LOR/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/form.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LOR/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/migrations/0002_auto_20210313_2152.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/migrations/0003_auto_20210330_1950.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/migrations/0004_requestmodel_writer_email.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/templates/LOR/enter_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/templates/LOR/enter_request.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/test/test_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/test/test_form.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LOR/test/test_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/test/test_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/test/test_url.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/test/test_url.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/test/test_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/test/test_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LOR/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LOR/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReccomendationPortal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReccomendationPortal/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReccomendationPortal/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReccomendationPortal/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReccomendationPortal/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReccomendationPortal/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django/conf/app_template/__init__.py-tpl" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

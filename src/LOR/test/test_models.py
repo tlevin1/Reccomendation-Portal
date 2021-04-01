@@ -6,27 +6,16 @@ from LOR.models import RequestModel
 class LORModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-<<<<<<< HEAD:src/LOR/test_models.py
-        LOR.objects.create(requester='Bob', requester_email='b@gmail.com', request_date='2021-01-01',
-                           position='developer', due_date='2021-02-02', writer_email='k@umbc.edu',
-=======
         RequestModel.objects.create(requester='Bob', requester_email='b@gmail.com', request_date='2021-01-01',
                            position='developer', due_date='2021-02-02', writer_name='kate',
->>>>>>> feature/requesting_form:src/LOR/test/test_models.py
                            company_name='NSA', company_website='nsa.gov', company_email='nsa@gov.com',
                            company_recipients='julia', status='pending', cv='TBD', resume='TBD',
                            transcript='TBD', additional_info='TBD')
 
     def test_good_to_string(self):
-<<<<<<< HEAD:src/LOR/test_models.py
-        lor = LOR(requester_email="b@gmail.com", writer_email="k@umbc.edu", status="pending", due_date="2021-01-01",
-                  position="developer")
-        self.assertEqual(str(lor), "b@gmail.com k@umbc.edu pending 2021-01-01")
-=======
         lor = RequestModel(requester="Bob", writer_name="kate", status="pending", due_date="2021-01-01",
                   position="developer")
         self.assertEqual(str(lor), "Bob kate pending 2021-01-01")
->>>>>>> feature/requesting_form:src/LOR/test/test_models.py
 
     def test_requester_label(self):
         lor = RequestModel.objects.get(id=1)
