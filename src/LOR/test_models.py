@@ -1,6 +1,8 @@
-from django.test import TestCase
-from .models import LOR
-
+from django.test import TestCase, Client
+from .models import LOR, Req_a
+from datetime import datetime
+from django.urls import resolve, reverse
+from .views import writer_req
 
 # Create your tests here.
 class LORModelTest(TestCase):
@@ -116,3 +118,17 @@ class LORModelTest(TestCase):
         lor = LOR.objects.get(id=1)
         field_label = lor._meta.get_field('additional_info').verbose_name
         self.assertEqual(field_label, 'additional info')
+
+class Testmodels(TestCase):
+
+    def test_model_req(self):
+        self.proj = Req_a.objects.create(
+        name='Joshua',
+        answer = '',
+        R_date = '2001-02-21',
+        A_date = datetime.now()
+        )
+        self.assertEquals(self.proj.name, 'Joshua')
+        self.assertEquals(self.proj.R_date, '2001-02-21')
+
+        # test to see if all objects variable are correct
