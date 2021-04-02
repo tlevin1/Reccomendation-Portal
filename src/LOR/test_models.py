@@ -7,15 +7,15 @@ class LORModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         LOR.objects.create(requester='Bob', requester_email='b@gmail.com', request_date='2021-01-01',
-                           position='developer', due_date='2021-02-02', writer_email='k@gmail.com',
+                           position='developer', due_date='2021-02-02', writer_email='k@umbc.edu',
                            company_name='NSA', company_website='nsa.gov', company_email='nsa@gov.com',
                            company_recipients='julia', status='pending', cv='TBD', resume='TBD',
                            transcript='TBD', additional_info='TBD')
 
     def test_good_to_string(self):
-        lor = LOR(requester_email="j@umbc.edu", writer_email="k@umbc.edu", status="pending", due_date="2021-01-01",
+        lor = LOR(requester_email="b@gmail.com", writer_email="k@umbc.edu", status="pending", due_date="2021-01-01",
                   position="developer")
-        self.assertEqual(str(lor), "j@umbc.edu k@umbc.edu pending 2021-01-01")
+        self.assertEqual(str(lor), "b@gmail.com k@umbc.edu pending 2021-01-01")
 
     def test_requester_label(self):
         lor = LOR.objects.get(id=1)
