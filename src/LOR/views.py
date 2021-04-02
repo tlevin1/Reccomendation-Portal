@@ -85,3 +85,22 @@ def writer_req(request):
         #save into database
 
     return render(request, 'LOR/requests.html', {'answers': answer})
+
+def writer_review(request):
+    #all data
+    obj = models.LOR.objects.all()
+    request_form = {
+        "object": obj
+    }
+    print(obj)
+    if 'Cover Letter' in request.POST:
+        print('Cover Letter Button pressed')
+    elif 'Resume' in request.POST:
+        print('Resume Button pressed')
+    elif 'Transcript' in request.POST:
+        print('Transcript Button pressed')
+    elif 'Additional Information' in request.POST:
+        print('Review Button pressed')
+    elif 'Next' in request.POST:
+        print('Next Button pressed')
+    return render(request, 'LOR/writer_review.html', {'objs': obj})

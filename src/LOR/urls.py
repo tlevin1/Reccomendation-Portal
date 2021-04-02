@@ -7,4 +7,5 @@ urlpatterns = [
     path('submitRequest/', views.view_enter_request, name='requesting'),
     path('request/', views.writer_req, name="writer_req"),
     #path('save/', views.view_save_request, name='save'),
+path('writer_rev/', views.writer_review, name="writer_review"),
 ]

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 from datetime import datetime
 
+from datetime import datetime
 
 #add proffesor in future, right now it is just a sample
 Proffesors= [
