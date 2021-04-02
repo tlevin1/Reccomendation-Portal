@@ -10,4 +10,5 @@ Letters of Recommendation is an online UMBC application that manages a letter of
 If Django is installed, to run the test type the following into the command window: python3 manage.py test
 
 Django Version:3.1.7
+
 Python Version:3.9.2
