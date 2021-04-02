@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
+from datetime import datetime
 
 from datetime import datetime
 
@@ -61,3 +62,13 @@ class LOR(models.Model):
         return str(self.requester_email) + " " + str(self.writer_email) + " " + str(self.status) \
                + " " + str(self.due_date)
 
+
+class Req_a(models.Model):
+    name = models.CharField(max_length=100)
+    answer = models.CharField(max_length=100, blank=True)
+    R_date = models.DateField(blank=True)
+    A_date = models.DateField(default=datetime.now())
+
+#models for accepting/denying student request
+    def __str__(self):
+        return str(self.name) + " " + str(self.answer)+ " " + str(self.A_date)
