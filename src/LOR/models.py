@@ -20,4 +20,4 @@ class LOR(models.Model):
     additional_info = models.TextField()
 
     def __str__(self):
-        return str(self.requester_email) + " " + str(self.writer_email) + " " + str(self.status) + " " + str(self.due_date)
+        return str(self.requester) + " " + "\n" + str(self.position) + " " + "\n" + str(self.due_date) + " " + "\n" + str(self.request_date) + " " + "\n" + str(self.writer_email) + " " + "\n" + str(self.company_name) + " " + "\n" + str(self.company_website) + " " + "\n" + str(self.company_recipients)
