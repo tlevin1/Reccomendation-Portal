@@ -6,8 +6,8 @@ from LOR import views
 #test html
 class LOR_test_url(TestCase):
 #test url
-    def test_writer_review(self):
-        url = reverse('writer_rev/')
+    def testmy_writer_review(self):
+        url = reverse('writer_review')
         self.assertEqual(resolve(url).func, views.writer_review)
 
 #test data
