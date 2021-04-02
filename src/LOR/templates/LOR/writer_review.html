@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Request</title>
+    </head>
+<body>
+<h1 style="text-align: left;font-size:100%;">Requester:
+{% for obj in objs %}
+{{obj.requester}}
+    </h1>
+<table style="width:100%">
+  <tr>
+    <th style="text-align: left;font-size:100%;">Position:
+{{obj.position}}
+    </th>
+   <th style="text-align: left;font-size:100%;">Due Date:
+ {{obj.due_date}}
+    </th>
+    <th style="text-align: left;font-size:100%;">Requested On:
+{{obj.request_date}}
+    </th>
+ </tr>
+    <hr>
+  <tr>
+      <td style="text-align: left;font-size:100%;">Writer:
+ {{obj.writer_email}}
+    </td>
+      <td style="text-align: left;font-size:100%;">Website:
+{{obj.company_website}}
+    </td>
+  </tr>
+  <tr>
+      <td style="text-align: left;font-size:100%;">Destination:
+{{obj.company_name}}
+    </td>
+      <td style="text-align: left;font-size:100%;">Recipients:
+{{obj.company_recipients}}
+    </td>
+       {% endfor %}
+  </tr>
+</table>
+
+<form action="" method="POST">{% csrf_token %}
+    <button type="submit" name="Next" value="Next"style="float: right;"><b>Next</b></button>
+ <button type="submit" name="Cover Letter" value="Cover Letter"style="float: right;"><b>Cover Letter</b></button>
+    <button type="submit" name="Additional Information" value="Additional Information"style="float: right;"><b>Additional Info</b></button>
+<button type="submit" name="Transcript" value="Transcript"style="float: right;"><b>Transcript</b></button>
+    <button type="submit" name="Resume" value="Resume"style="float: right;"><b>Resume</b></button>
+</form>
+</body>
+</html>
+
