@@ -2,6 +2,7 @@ from django.test import TestCase
 #for testing the url
 from django.urls import reverse, resolve
 from LOR import views
+from .models import LOR
 
 #test html
 class LOR_test_url(TestCase):
@@ -38,6 +39,9 @@ class MyTests(TestCase):
         print("Method: test_false_is_false.")
         self.assertFalse(False)
 
+    '''
+    what does this test
     def test_false_is_true(self):
         print("Method: test_false_is_true.")
         self.assertTrue(False)
+    '''
