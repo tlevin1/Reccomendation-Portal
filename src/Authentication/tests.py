@@ -1,7 +1,6 @@
 from django.test import TestCase
 from datetime import datetime, timedelta
-from .models import *
-from django.contrib.auth.models import User
+from .models import LorUser, LorRequest, LorCompanyRecipient, LorDocument, UserRoles, DocumentTypes
 from django.contrib.auth.models import Group
 
 class LORRoleModelTest(TestCase):
@@ -99,3 +98,20 @@ class LORRoleModelTest(TestCase):
 
         self.assertEqual(jhons_request_recipients[0].recipient_name, 'Barack Obama')
         self.assertEqual(jhons_request_recipients[1].company_email, 'jbiden@us.gov')
+
+class LORUserTest(TestCase):
+    date_now = datetime.now()
+    date_future = date_now + timedelta(days=30)
+
+    @classmethod
+    def setUpTestData(cls):
+        LorUser.objects.create(username='testuser1', first_name='admin', email='adminperson@umbc.edu',
+                               role=UserRoles.ADMIN, position="student")
+        LorUser.objects.create(username='testuser2', name_title='Dr', first_name='Harriet', last_name='Tubman',
+                               email='htubman@umbc.edu', role=UserRoles.WRITER, position="abolitionist")
+        LorUser.objects.create(username='testuser3', name_title='Dr', first_name='Katherine', last_name='Johnson',
+                               email='kjohnson@umbc.edu', role=UserRoles.WRITER, position="mathematician")
+        LorUser.objects.create(username='testuser4', first_name='Bob', email='bob@umbc.edu', role=UserRoles.REQUESTER,
+                               position="student")
+        LorUser.objects.create(username='testuser5', first_name='John', email='john@umbc.edu', role=UserRoles.REQUESTER,
+                               position="alumni")

@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="076d4416-8162-4cce-9cbe-e1e370322afa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Authentication/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Authentication/migrations/0002_auto_20210331_1631.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Authentication/migrations/0003_auto_20210331_1716.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/migrations/0002_auto_20210331_2046.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/migrations/0003_lor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/test_writer_review.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/test_writer_review.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/test_writer_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/test_writer_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Authentication/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentication/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LOR/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReccomendationPortal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReccomendationPortal/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +35,7 @@
       <option name="presentableId" value="Default" />
       <updated>1617299634857</updated>
       <workItem from="1617551009532" duration="365000" />
+      <workItem from="1617551437900" duration="2560000" />
     </task>
     <servers />
   </component>
@@ -58,5 +52,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

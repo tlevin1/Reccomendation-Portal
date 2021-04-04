@@ -122,3 +122,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+'''
+fields.W342 recommends using onetoonefield instead of ForeignKey
+    onetoonefield is suboptimal design
+fields.W161 recommends using timezone.now, issue has to be discussed
+    to identify if we should use UTC or (EST/EDT)
+'''
+SILENCED_SYSTEM_CHECKS = ["fields.W342", "fields.W161"]
