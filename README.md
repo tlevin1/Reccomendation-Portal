@@ -1,5 +1,5 @@
-Reccomendation Portal
-
+# Reccomendation Portal
+## Description
 
 Software Developers: Jessica Altman, Quang Dang, Thuan Tran, Edwin Trejo, and Tehila Levin
 
@@ -12,3 +12,15 @@ If Django is installed, to run all tests type the following into the command win
 Django Version:3.1.7
 
 Python Version:3.9.2
+
+## How to run
+* on ms windows
+  ````bash
+  venv\Scripts\activate.bat
+  ````
+  ````bash
+  cd src
+  ````
+  ````bash
+  py -m runserver
+  ````

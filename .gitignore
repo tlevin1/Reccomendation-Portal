@@ -105,7 +105,8 @@ celerybeat.pid
 .env
 .venv
 env/
-venv/
+#we need to use a single version of this
+#venv/
 ENV/
 env.bak/
 venv.bak/
