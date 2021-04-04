@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
-from django.contrib.auth.models import User
+from Authentication.models import LorUser as User
 from datetime import datetime
 from .models import LOR, Req_a
 from .views import writer_req

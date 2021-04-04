@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 from datetime import datetime
-
-from datetime import datetime
+from Authentication.models import LorUser as User
 
 #add proffesor in future, right now it is just a sample
 Proffesors= [
@@ -35,6 +34,10 @@ class RequestModel(models.Model):
     resume = models.URLField(max_length=100, blank=True, null=True)
     transcript = models.URLField(max_length=100, blank=True, null=True)
     additional_info = models.TextField(max_length=1000, blank=True, null=True)
+    requester_fk = models.ForeignKey(User, unique=True, blank=True, null=True,
+                                     related_name="related_requestmodel_requester_id", on_delete=models.CASCADE)
+    writer_fk = models.ForeignKey(User, unique=True, blank=True, null=True,
+                                  related_name="related_requestmodel_writer_id", on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.requester) + " " + str(self.writer_name) + " " + str(self.status) + " " + str(self.due_date)
