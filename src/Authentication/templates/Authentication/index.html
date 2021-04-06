@@ -1,0 +1,26 @@
+{% load socialaccount %}
+<html>
+    <head>
+        <title>Google Registration</title>
+        <style>
+            * {clear: both;}
+        </style>
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+            <h1>{{ user.username }}, you are signed in!</h1>
+            <form action='authLogOut' method='GET'>
+                <button name="logout-btn" type='submit'>Log Out</button>
+            </form>
+
+        {% else %}
+
+            <h1>Sign In to Continue</h1>
+            <a href="{% provider_login_url 'google' %}">
+                <button name="login-btn">Login with Google</button>
+            </a>
+
+        {% endif %}
+
+      </body>
+</html>
