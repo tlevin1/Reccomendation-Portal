@@ -22,5 +22,5 @@ Python Version:3.9.2
   cd src
   ````
   ````bash
-  py -m runserver
+  py manage.py runserver
   ````
