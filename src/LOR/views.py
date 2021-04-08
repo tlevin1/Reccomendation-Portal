@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from .models import LOR, Req_a
 from datetime import datetime
@@ -104,3 +105,14 @@ def writer_review(request):
     elif 'Next' in request.POST:
         print('Next Button pressed')
     return render(request, 'LOR/writer_review.html', {'objs': obj})
+
+
+def upload_file(request):
+    cont = {}
+    if request.method == 'POST':
+        upload = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(upload.name, upload)
+        cont['url'] = fs.url(name)
+
+    return render(request, 'LOR/upload.html', cont)
