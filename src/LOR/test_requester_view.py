@@ -37,7 +37,7 @@ class RequesterViewTest(TestCase):
         r_user2.save()
 
     def test_view_url_is_at_correct_location(self):
-        # Log in the first writer
+        # Log in the first requester
         login = self.client.login(username='r_user1', password='justapwd12')
         response = self.client.get('/requester/')
         self.assertEqual(response.status_code, 200)
@@ -48,30 +48,30 @@ class RequesterViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_view_url_is_accessible_by_name(self):
-        # Log in the first writer
+        # Log in the first requester
         login = self.client.login(username='r_user1', password='justapwd12')
         response = self.client.get(reverse('requester_view'))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        # Log in the first writer
+        # Log in the first requester
         login = self.client.login(username='r_user1', password='justapwd12')
         response = self.client.get(reverse('requester_view'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'requester_view.html')
 
-    def test_view_has_writer_specific_sorted_data(self):
-        # Log in the first writer
+    def test_view_has_requester_specific_sorted_data(self):
+        # Log in the first requester
         login = self.client.login(username='r_user1', password='justapwd12')
         response = self.client.get(reverse('requester_view'))
 
-        # Check that our writer is logged in
+        # Check that our requester is logged in
         self.assertEqual(str(response.context['user']), 'r_user1')
 
         # Check that we got a response "success"
         self.assertEqual(response.status_code, 200)
 
-        # Check that we got two requests for the writer
+        # Check that we got two requests for the requester
         self.assertTrue(len(response.context['sorted_lors']) == 2)
 
         # Check that the requests are in sorted order by due date
