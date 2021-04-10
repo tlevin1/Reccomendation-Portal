@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
+{% extends 'dashboard_base.html' %}
+{% block title %}
     <title>Requester Dashboard</title>
-    <style>
-        button {
-            background-color: rgb(176, 245, 231);
-            border: 1px solid black;
-            font-size: 15px;
-            border-radius: 4px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid black;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #fefbd8;
-        }
-        tr:nth-child(even){
-            background-color: rgb(222, 235, 247);
-        }
-    </style>
-    {% if messages %}
-       {% for msg in messages %}
-           {% if msg.tags %}<script>alert("{{ msg }}")</script>{% endif %}
-       {% endfor %}
-   {% endif %}
-</head>
-<body>
-<h1 style="text-align: center;font-size:300%;">Requester Dashboard</h1>
+{% endblock %}
+
+{% block content %}
+<h1>Requester Dashboard</h1>
 
 <form action="" method="POST">{% csrf_token %}
 
@@ -75,5 +46,4 @@
     {% endfor %}
 </table>
 </form>
-</body>
-</html>
+{% endblock %}
