@@ -32,24 +32,27 @@
 
 <form action="" method="POST">{% csrf_token %}
 
-<button type="submit" name="Accept" value="Accept"><b>Accept</b></button>
-<button type="submit" name="Deny" value="Deny"><b>Deny</b></button>
-<button type="submit" name="Review" value="Review"><b>Review</b></button>
-<button type="submit" name="Complete" value="Complete"><b>Complete</b></button>
+<button type="submit" name="New Request" value="New Request"><b>New Request</b></button>
+<button type="Review/Update" name="Review/Update" value="Review/Update"><b>Review/Update</b></button>
+<button type="Withdraw" name="Withdraw" value="Withdraw"><b>Withdraw</b></button>
+
 
 <table>
     <tr>
         <th style="width:2%"></th>
-        <th>Requester</th>
-        <th>Requester Email</th>
-        <th>Status</th>
-        <th>Due Date</th>
-        <th>Requested On</th>
-        <th>Position</th>
+        <th>Professor
+        <td><input type="checkbox" /></td></th>
+       <th>Status
+        <td><input type="checkbox" /></td></th>
+        <th>Due Date
+        <td><input type="checkbox" /></td></th>
+       <th>Position
+        <td><input type="checkbox" /></td></th>
     </tr>
     {% for lor in sorted_lors %}
     <tr>
         <td>
+
             <label><input type="checkbox" name="sel_box" value="{{ lor.id }}"/>
             </label>
         </td>
