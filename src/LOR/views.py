@@ -104,3 +104,34 @@ def writer_review(request):
     elif 'Next' in request.POST:
         print('Next Button pressed')
     return render(request, 'LOR/writer_review.html', {'objs': obj})
+
+@login_required
+def requester_view(request):
+    print(request.method)
+    cur_user = request.user
+    print(cur_user)
+    print("User is ", cur_user)
+
+    # Make sure user is logged in
+    # if cur_user.is_authenticated:
+    print("User is logged in")
+    if request.method == 'POST':
+        # Get the list of ids associated with selected table rows
+        if not request.POST.getlist('sel_box'):
+            # messages.info(request, 'Nothing Selected')
+            print('Nothing selected')
+        else:
+            sel_ids = request.POST.getlist('sel_box')
+            # Check which button is pressed
+            if 'New Request' in request.POST:
+                print('New Request Button pressed')
+            elif 'Review/Update' in request.POST:
+                print('Review/Update pressed')
+            elif 'Withdraw' in request.POST:
+                print('Withdraw Button pressed')
+    sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
+    context = {"sorted_lors": sorted_lors}
+    return render(request, 'requester_view.html', context)
+# else:
+    # If no one is logged in, send back to home page
+    # return redirect('/')
