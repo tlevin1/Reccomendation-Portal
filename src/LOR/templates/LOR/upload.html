@@ -7,11 +7,12 @@
 <body>
 <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-    <input type="file" name="document">
+    {{uploadform.as_p}}
     <button type="submit">Upload file</button>
 </form>
-    {% if url %}
-    <p>Uploaded : <a href="{{ url }}">{{url}}</a></p>
-    {% endif %}
+{% for upload in uploads %}
+<h1>{{upload.name}}</h1>
+<a href="{{upload.pdf.url }}" class="btn btn-primary btn-sm">Download</a>
+{% endfor %}
 </body>
 </html>

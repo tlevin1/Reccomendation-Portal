@@ -7,8 +7,8 @@ from datetime import datetime
 from django import http
 from . import models
 from . import form
-
-
+from .form import Uploadform
+from .models import Upload
 
 # stub for home page
 def index(request):
@@ -108,11 +108,14 @@ def writer_review(request):
 
 
 def upload_file(request):
-    cont = {}
+    Uploads = Upload.objects.all()
     if request.method == 'POST':
-        upload = request.FILES['document']
-        fs = FileSystemStorage()
-        name = fs.save(upload.name, upload)
-        cont['url'] = fs.url(name)
+        form = Uploadform(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('upload_file')
+        else:
+            form = Uploadform()
 
-    return render(request, 'LOR/upload.html', cont)
+
+    return render(request, 'LOR/upload.html', {'uploadform': Uploadform, 'uploads': Uploads})

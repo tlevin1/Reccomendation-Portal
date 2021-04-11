@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="076d4416-8162-4cce-9cbe-e1e370322afa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/LOR/templates/LOR/upload.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LOR/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LOR/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LOR/templates/LOR/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/templates/LOR/upload.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LOR/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReccomendationPortal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReccomendationPortal/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReccomendationPortal/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReccomendationPortal/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +51,14 @@
       <workItem from="1617551009532" duration="365000" />
       <workItem from="1617551437900" duration="2560000" />
     </task>
+    <task id="LOCAL-00001" summary="added some function to submit loaded form to a static file on local computer called media">
+      <created>1617900793558</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617900793558</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -68,5 +75,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added some function to submit loaded form to a static file on local computer called media" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some function to submit loaded form to a static file on local computer called media" />
   </component>
 </project>

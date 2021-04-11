@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from .models import RequestModel
+from .models import RequestModel, Upload
 
 
 # Create your form here.
@@ -30,3 +30,7 @@ class RequestForm(forms.ModelForm):
             'transcript': 'Please put your transcript URL into this box',
         }
 
+class Uploadform(forms.ModelForm):
+    class Meta:
+        model = Upload
+        fields = ('name', 'type', 'pdf')
