@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Requestor Dashboard</title>
+    <style>
+        button {
+            background-color: rgb(176, 245, 231);
+            border: 1px solid black;
+            font-size: 15px;
+            border-radius: 4px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #fefbd8;
+        }
+        tr:nth-child(even){
+            background-color: rgb(222, 235, 247);
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center;font-size:300%;">Requester Dashboard</h1>
+
+<form action="" method="POST">{% csrf_token %}
+
+<button type="submit" name="Accept" value="Accept"><b>Accept</b></button>
+<button type="submit" name="Deny" value="Deny"><b>Deny</b></button>
+<button type="submit" name="Review" value="Review"><b>Review</b></button>
+<button type="submit" name="Complete" value="Complete"><b>Complete</b></button>
+
+<table>
+    <tr>
+        <th style="width:2%"></th>
+        <th>Requester</th>
+        <th>Requester Email</th>
+        <th>Status</th>
+        <th>Due Date</th>
+        <th>Requested On</th>
+        <th>Position</th>
+    </tr>
+    {% for lor in sorted_lors %}
+    <tr>
+        <td>
+            <label><input type="checkbox" name="sel_box" value="{{ lor.id }}"/>
+            </label>
+        </td>
+        <td>
+            {{ lor.requester }}
+        </td>
+        <td>
+            {{ lor.requester_email }}
+        </td>
+        <td>
+            {{ lor.status }}
+        </td>
+        <td>
+            {{ lor.due_date }}
+        </td>
+        <td>
+            {{ lor.request_date }}
+        </td>
+        <td>
+            {{ lor.position }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</form>
+</body>
+</html>
