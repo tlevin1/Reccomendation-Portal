@@ -12,21 +12,21 @@ class RequesterViewTest(TestCase):
                            position='Software Developer', writer_email='w1@umbc.edu',
                            due_date='2021-03-30', company_name='ToysRUs',
                            company_website='toysrus.com', company_email='toysrus@gmail.com',
-                           company_recipients='John Day, Sue Night', status='pending', cv='tbd',
+                           company_recipients='John Day, Sue Night', status='Pending', cv='tbd',
                            resume='tbd', transcript='tbd', additional_info='none')
 
         LOR.objects.create(requester='r2', requester_email='r2@umbc.edu', request_date='2021-02-15',
                            position='Research Analyst', writer_email='w3@umbc.edu',
                            due_date='2021-04-10', company_name='nsa', company_website='nsa.gov',
                            company_email='nsahr@gmail.com', company_recipients='New Hire Staff',
-                           status='accepted', cv='tbd', resume='tbd', transcript='tbd',
+                           status='Accepted', cv='tbd', resume='tbd', transcript='tbd',
                            additional_info='none')
 
         LOR.objects.create(requester='r1', requester_email='r1@umbc.edu', request_date='2021-02-15',
                            position='Project Director', writer_email='w1@umbc.edu',
                            due_date='2021-03-10', company_name='praxis',
                            company_website='praxis.com', company_email='praxis@yahoo.com',
-                           company_recipients='Attn: Ronald Menser', status='pending', cv='tbd',
+                           company_recipients='Attn: Ronald Menser', status='Completed', cv='tbd',
                            resume='tbd', transcript='tbd', additional_info='none')
 
         # create two users
@@ -82,3 +82,28 @@ class RequesterViewTest(TestCase):
             else:
                 self.assertTrue(last_date <= lor.due_date)
                 last_date = lor.due_date
+
+    def test_nothing_selected(self):
+        # test if no selections made in requester dashboard
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = []
+        response = self.client.post('/requester/', data={"sel_box": sel_box})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Nothing selected')
+
+    def test_withdraw(self):
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = [1, 3]
+        context = {
+            "Withdraw": "Withdraw",
+            "sel_box": sel_box
+        }
+        response = self.client.post('/requester/', data=context)
+        self.assertEqual(response.status_code, 200)
+
+        # test error msg is sent if attempting to withdraw a completed request
+        self.assertContains(response, 'Unable to withdraw a completed request')
+
+        # test that request can be withdrawn (id=1 has valid Pending status)
+        lor = LOR.objects.get(id=sel_box[0])
+        self.assertEqual(lor.status, "Withdrawn")
