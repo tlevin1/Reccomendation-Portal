@@ -83,6 +83,7 @@ class RequesterViewTest(TestCase):
                 self.assertTrue(last_date <= lor.due_date)
                 last_date = lor.due_date
 
+
     def test_nothing_selected(self):
         # test if no selections made in requester dashboard
         login = self.client.login(username='r_user1', password='justapwd12')
@@ -90,6 +91,7 @@ class RequesterViewTest(TestCase):
         response = self.client.post('/requester/', data={"sel_box": sel_box})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Nothing selected')
+
 
     def test_withdraw(self):
         login = self.client.login(username='r_user1', password='justapwd12')
