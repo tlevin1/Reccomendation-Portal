@@ -105,6 +105,10 @@ def writer_review(request):
         print('Next Button pressed')
     return render(request, 'LOR/writer_review.html', {'objs': obj})
 
+
+#select a request and click on review it will bring up all the contents of the
+# request and u can review it.Can change the stuff in the request.
+# Like if u need to change the writer email u can do that
 @login_required
 def requester_view(request):
     print(request.method)
