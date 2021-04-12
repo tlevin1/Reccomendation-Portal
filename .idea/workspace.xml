@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="076d4416-8162-4cce-9cbe-e1e370322afa" name="Default Changelist" comment="">
+    <list default="true" id="076d4416-8162-4cce-9cbe-e1e370322afa" name="Default Changelist" comment="added some function to submit loaded form to a static file on local computer called media">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LOR/templates/LOR/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/templates/LOR/upload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LOR/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReccomendationPortal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReccomendationPortal/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +56,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617900793558</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added some function to submit loaded form to a static file on local computer called media">
+      <created>1618110771916</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618110771916</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
