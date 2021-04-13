@@ -1,15 +1,21 @@
-# from django.test import TestCase, Client
-# from django.urls import reverse, resolve
-# from Authentication.models import LorUser as User
-# from datetime import datetime
-# from src.LOR.models import LOR, Req_a
-# from src.LOR.views import requester_view
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
 from Authentication.models import LorUser as User
 from datetime import datetime
-from .models import LOR, Req_a
-from .views import writer_req
+from LOR.models import LOR, Req_a
+from LOR.views import requester_view
+
+# from django.test import TestCase, Client
+# from django.urls import reverse, resolve
+# from Authentication.models import LorUser as User
+# from datetime import datetime
+# from .models import LOR, Req_a
+# from .views import writer_req
+
+# from django.test import TestCase
+# from django.urls import reverse
+# from Authentication.models import LorUser as User
+# from .models import LOR
 
 class RequesterViewTest(TestCase):
 
@@ -85,7 +91,7 @@ class TestViews(TestCase):
         self.req_url = reverse('requester_view')
 
         response = self.client.get(reverse('requester_view'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
         self.assertTemplateUsed(response, 'LOR/requester_view.html')
     #testing to see if there is a 200 response
 
