@@ -108,7 +108,7 @@ def writer_review(request):
 
 
 def upload_file(request):
-    Uploads = Upload.objects.all()
+
     if request.method == 'POST':
         form = Uploadform(request.POST, request.FILES)
         if form.is_valid():
@@ -118,4 +118,18 @@ def upload_file(request):
             form = Uploadform()
 
 
-    return render(request, 'LOR/upload.html', {'uploadform': Uploadform, 'uploads': Uploads})
+    return render(request, 'LOR/upload.html', {'uploadform': Uploadform})
+
+
+def upload_view(request):
+    Uploads = Upload.objects.all()
+
+    return render(request, 'LOR/uploadview.html', {'uploads': Uploads})
+
+def delete_upload(request, pk):
+    Uploads = Upload.objects.all()
+    if request.method == 'POST':
+        DEL = Upload.objects.get(pk=pk)
+        DEL.delete()
+
+    return render(request, 'LOR/uploadview.html', {'uploads': Uploads})

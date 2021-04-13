@@ -9,5 +9,6 @@ urlpatterns = [
     #path('save/', views.view_save_request, name='save'),
 path('writer_rev/', views.writer_review, name="writer_review"),
     path('uploadfile/',views.upload_file, name='upload_file'),
-
+    path('uploadview/', views.upload_view, name='upload_view'),
+    path('uploadview/<int:pk>/', views.delete_upload, name='delete_upload')
 ]
