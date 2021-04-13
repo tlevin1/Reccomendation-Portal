@@ -50,15 +50,6 @@ def writer_view(request):
     # return redirect('/')
 
 # Create your views here.
-'''
-def view_enter_request(request):
-    obj = models.Request_Form.objects.get(id=1)
-    request_form = {
-        "object" : obj
-    }
-    return render(request,"LOR/enter_request.html", request_form);
-'''
-
 
 def view_enter_request(request):
     obj = form.RequestForm(request.POST or None)
@@ -106,9 +97,7 @@ def writer_review(request):
     return render(request, 'LOR/writer_review.html', {'objs': obj})
 
 
-#select a request and click on review it will bring up all the contents of the
-# request and u can review it.Can change the stuff in the request.
-# Like if u need to change the writer email u can do that
+#request review
 @login_required
 def requester_view(request):
     print(request.method)
@@ -122,7 +111,7 @@ def requester_view(request):
     if request.method == 'POST':
         # Get the list of ids associated with selected table rows
         if not request.POST.getlist('sel_box'):
-            # messages.info(request, 'Nothing Selected')
+            #messages.info(request, 'Nothing Selected')
             print('Nothing selected')
         else:
             sel_ids = request.POST.getlist('sel_box')
