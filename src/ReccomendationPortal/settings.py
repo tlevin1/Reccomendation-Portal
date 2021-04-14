@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'LOR.apps.LorConfig',
+    'requestor_manage.apps.RequestorManageConfig',
     'Authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
