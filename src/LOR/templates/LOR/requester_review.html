@@ -30,10 +30,12 @@
 <body>
 <h1 style="text-align: center;font-size:300%;">Requester Dashboard</h1>
 
-<form action="" method="POST">{% csrf_token %}
+<form action="{% url 'request_page' %}" method="POST">{% csrf_token %}
 
 <button type="submit" name="New Request" value="New Request"><b>New Request</b></button>
-<button type="Review/Update" name="Review/Update" value="Review/Update"><b>Review/Update</b></button>
+
+    <form action="{% url 'request_page' %}" method="POST">{% csrf_token %}
+<button type="submit" name="Review/Update" value="Review/Update"><b>Review/Update</b></button> </form>
 <button type="Withdraw" name="Withdraw" value="Withdraw"><b>Withdraw</b></button>
 
 
