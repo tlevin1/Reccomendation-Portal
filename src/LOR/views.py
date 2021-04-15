@@ -138,8 +138,8 @@ def requester_review(request):
 
 #added for review/update request
 def requester_view_particular_request(request):
-    results = models.UpdateRequest.objects.all()
-    print(results)
+    obj = models.UpdateRequest.objects.all()
+    print(obj)
     print(request.method)
     #returning dictionary
-    return render(request,'LOR/request_page.html',{"res ": results})
+    return render(request,'LOR/request_page.html',{"objs ": obj})
