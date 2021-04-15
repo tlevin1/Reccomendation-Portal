@@ -7,12 +7,14 @@ from datetime import datetime
 from django import http
 from . import models
 from . import form
-
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 # stub for home page
 def index(request):
     return HttpResponse('Letters of Recommendation index')
+
 
 # Change request status to given new status if current status isn't in invalid_sel list
 def change_status(sel_ids, invalid_sel, new_status):
@@ -112,7 +114,8 @@ def view_enter_request(request):
     request_form = {
         "object": obj
     }
-    return render(request,"LOR/enter_request.html", request_form);
+    return render(request,"LOR/enter_request.html", request_form)
+
 
 def writer_req(request):
     #form = ReqForm()
@@ -128,6 +131,7 @@ def writer_req(request):
         #save into database
 
     return render(request, 'LOR/requests.html', {'answers': answer})
+
 
 def writer_review(request):
     #all data
@@ -147,3 +151,46 @@ def writer_review(request):
     elif 'Next' in request.POST:
         print('Next Button pressed')
     return render(request, 'LOR/writer_review.html', {'objs': obj})
+
+
+#request review
+@login_required
+def requester_review(request):
+    # all data - model
+    obj = LOR.objects.all()
+    print(obj)
+    print(request.method)
+    cur_user = request.user
+    print(cur_user)
+    print("User is ", cur_user)
+
+# Make sure user is logged in
+# if cur_user.is_authenticated:
+    print("User is logged in")
+# Check which button is pressed
+#POST - result of form submission
+    if request.method == 'POST':
+        if not request.POST.getlist('sel_box'):
+            #messages.info(request, 'Nothing Selected')
+            print('Nothing selected')
+        if 'New Request' in request.POST:
+            print("Request Button Selected")
+        elif 'Review/Update' in request.POST:
+            print('Review/Update pressed')
+            #return render(request, 'LOR/request_page.html', {'objs': obj})
+            return HttpResponseRedirect('req_page')
+        elif 'Withdraw' in request.POST:
+            print('Withdraw Button pressed')
+        else:
+            sel_ids = request.POST.getlist('sel_box')
+
+    return render(request, 'LOR/requester_review.html', {'objs': obj})
+
+
+#added for review/update request
+def requester_view_particular_request(request):
+    obj = models.UpdateRequest.objects.all()
+    print(obj)
+    print(request.method)
+    #returning dictionary
+    return render(request,'LOR/request_page.html',{"objs ": obj})
