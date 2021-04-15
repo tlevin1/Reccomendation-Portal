@@ -10,4 +10,5 @@ urlpatterns = [
 path('writer_rev/', views.writer_review, name="writer_review"),
 path('req_view/', views.requester_review, name="requester_view"),
 path('req_page', views.requester_view_particular_request, name="request_page"),
+    path('requester/', views.requester_view, name="requester_view"),
 ]
