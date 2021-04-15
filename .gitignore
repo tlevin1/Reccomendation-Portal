@@ -105,6 +105,7 @@ celerybeat.pid
 .env
 .venv
 env/
+#we need to use a single version of this
 venv/
 ENV/
 env.bak/
@@ -128,4 +129,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea/misc.xml
+.idea/workspace.xml
 .idea/workspace.xml
