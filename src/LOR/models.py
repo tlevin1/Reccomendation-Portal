@@ -76,10 +76,3 @@ class Req_a(models.Model):
     def __str__(self):
         return str(self.name) + " " + str(self.answer)+ " " + str(self.A_date)
 
-class Upload(models.Model):
-    name = models.CharField(max_length=100)
-    type = models.CharField(max_length=100)
-    pdf = models.FileField(upload_to='LOR/pdf/')
-
-    def __str__(self):
-        return self.name

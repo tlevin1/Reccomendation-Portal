@@ -23,6 +23,7 @@ urlpatterns = [
     path('Authentication/', include('Authentication.urls')),
     path('admin/', admin.site.urls),
     path('', views.view_home, name="home"),
+    path('', include('Upload.urls')),
 
 ]
 

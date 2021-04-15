@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'LOR.apps.LorConfig',
+    'Upload.apps.UploadConfig',
     'Authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
     'django.contrib.auth',

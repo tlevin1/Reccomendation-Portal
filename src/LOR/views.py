@@ -7,8 +7,6 @@ from datetime import datetime
 from django import http
 from . import models
 from . import form
-from .form import Uploadform
-from .models import Upload
 
 # stub for home page
 def index(request):
@@ -76,6 +74,7 @@ def writer_req(request):
     #form = ReqForm()
 
     answer = Req_a.objects.all()
+
     if request.method == 'POST':
             req = Req_a.objects.get(name=request.POST.get('name'))
             if(request.POST.get('status')):
@@ -107,29 +106,3 @@ def writer_review(request):
     return render(request, 'LOR/writer_review.html', {'objs': obj})
 
 
-def upload_file(request):
-
-    if request.method == 'POST':
-        form = Uploadform(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('upload_file')
-        else:
-            form = Uploadform()
-
-
-    return render(request, 'LOR/upload.html', {'uploadform': Uploadform})
-
-
-def upload_view(request):
-    Uploads = Upload.objects.all()
-
-    return render(request, 'LOR/uploadview.html', {'uploads': Uploads})
-
-def delete_upload(request, pk):
-    Uploads = Upload.objects.all()
-    if request.method == 'POST':
-        DEL = Upload.objects.get(pk=pk)
-        DEL.delete()
-
-    return render(request, 'LOR/uploadview.html', {'uploads': Uploads})
