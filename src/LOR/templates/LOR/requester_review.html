@@ -49,27 +49,27 @@
        <th>Position
         <td><input type="checkbox" /></td></th>
     </tr>
-    {% for lor in sorted_lors %}
+    {% for lor in objs %}
     <tr>
         <td>
 
             <label><input type="checkbox" name="sel_box" value="{{ lor.id }}"/>
             </label>
         </td>
-        <td>
-            {{ lor.requester }}
+ <td>
+            {{ lor.writer_email }}
         </td>
         <td>
-            {{ lor.requester_email }}
         </td>
         <td>
             {{ lor.status }}
         </td>
+         <td>
+        </td>
         <td>
             {{ lor.due_date }}
         </td>
-        <td>
-            {{ lor.request_date }}
+         <td>
         </td>
         <td>
             {{ lor.position }}
