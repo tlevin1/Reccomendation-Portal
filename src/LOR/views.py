@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .models import LOR, Req_a
+from .models import LOR, Req_a,UpdateRequest
 from datetime import datetime
 from django import http
 from . import models
 from . import form
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
 
 
 
@@ -99,7 +103,10 @@ def writer_review(request):
 
 #request review
 @login_required
-def requester_view(request):
+def requester_review(request):
+    # all data - model
+    obj = LOR.objects.all()
+    print(obj)
     print(request.method)
     cur_user = request.user
     print(cur_user)
@@ -108,23 +115,31 @@ def requester_view(request):
     # Make sure user is logged in
     # if cur_user.is_authenticated:
     print("User is logged in")
+    # Check which button is pressed
+    #POST - result of form submission
     if request.method == 'POST':
-        # Get the list of ids associated with selected table rows
         if not request.POST.getlist('sel_box'):
             #messages.info(request, 'Nothing Selected')
             print('Nothing selected')
+        if 'New Request' in request.POST:
+            print("Request Button Selected")
+        elif 'Review/Update' in request.POST:
+            print('Review/Update pressed')
+            #return render(request, 'LOR/request_page.html', {'objs': obj})
+            return HttpResponseRedirect('req_page')
+        elif 'Withdraw' in request.POST:
+            print('Withdraw Button pressed')
         else:
             sel_ids = request.POST.getlist('sel_box')
-            # Check which button is pressed
-            if 'New Request' in request.POST:
-                print('New Request Button pressed')
-            elif 'Review/Update' in request.POST:
-                print('Review/Update pressed')
-            elif 'Withdraw' in request.POST:
-                print('Withdraw Button pressed')
-    sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
-    context = {"sorted_lors": sorted_lors}
-    return render(request, 'requester_view.html', context)
-# else:
-    # If no one is logged in, send back to home page
-    # return redirect('/')
+
+
+    return render(request, 'LOR/requester_review.html', {'objs': obj})
+
+
+#added for review/update request
+def requester_view_particular_request(request):
+    results = models.UpdateRequest.objects.all()
+    print(results)
+    print(request.method)
+    #returning dictionary
+    return render(request,'LOR/request_page.html',{"res ": results})
