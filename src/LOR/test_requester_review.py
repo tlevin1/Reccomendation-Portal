@@ -5,17 +5,6 @@ from datetime import datetime
 from LOR.models import LOR, Req_a
 from LOR.views import requester_view
 
-# from django.test import TestCase, Client
-# from django.urls import reverse, resolve
-# from Authentication.models import LorUser as User
-# from datetime import datetime
-# from .models import LOR, Req_a
-# from .views import writer_req
-
-# from django.test import TestCase
-# from django.urls import reverse
-# from Authentication.models import LorUser as User
-# from .models import LOR
 
 class RequesterViewTest(TestCase):
 
@@ -55,16 +44,16 @@ class RequesterViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_view_uses_correct_template(self):
-        # Log in the first writer
+        # Log in the requester
         login = self.client.login(username='r_user1', password='pass1')
         response = self.client.get(reverse('requester_view'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'requester_view.html')
+        self.assertTemplateUsed(response, 'requester_review.html')
 
     def test_view_has_requester_specific_sorted_data(self):
         # Log in the first requester
         login = self.client.login(username='r_user1', password='pass1')
-        response = self.client.get(reverse('requester_view'))
+        response = self.client.get(reverse('requester_review'))
 
         # Check that requester is logged in
         self.assertEqual(str(response.context['user']), 'r_user1')
@@ -88,11 +77,11 @@ class TestViews(TestCase):
 
     def test_request_view(self):
         self.client = Client()
-        self.req_url = reverse('requester_view')
+        self.req_url = reverse('requester_review')
 
-        response = self.client.get(reverse('requester_view'))
+        response = self.client.get(reverse('requester_review'))
         self.assertEquals(response.status_code, 302)
-        self.assertTemplateUsed(response, 'LOR/requester_view.html')
+        self.assertTemplateUsed(response, 'LOR/requester_review.html')
     #testing to see if there is a 200 response
 
 class TestURL(TestCase):
