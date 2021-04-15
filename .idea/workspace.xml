@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+    <list default="true" id="076d4416-8162-4cce-9cbe-e1e370322afa" name="Default Changelist" comment="I added all of my edited files into a new appfile so there would be less conflict">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LOR/test_writer_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/LOR/test_writer_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Upload/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Upload/form.py" afterDir="false" />
     <list default="true" id="076d4416-8162-4cce-9cbe-e1e370322afa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
@@ -9,7 +13,19 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1qZuriX4KcblPqnUPk1cPaPcwz1" />
@@ -21,11 +37,23 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Upload/pdf" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\thuan\PycharmProjects\Reccomendation-Portal2\src\Upload\pdf" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\thuan\PycharmProjects\Reccomendation-Portal2\src\Upload\templates\Upload" />
+    </key>
     <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
   </component>
   <component name="RunManager">
@@ -52,6 +80,7 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -68,6 +97,42 @@
       <workItem from="1617575699397" duration="170000" />
       <workItem from="1617655408031" duration="98000" />
     </task>
+    <task id="LOCAL-00001" summary="added some function to submit loaded form to a static file on local computer called media">
+      <created>1617900793558</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617900793558</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added some function to submit loaded form to a static file on local computer called media">
+      <created>1618110771916</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618110771916</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fixed up some functions and view and update html">
+      <created>1618269144128</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618269144128</updated>
+    </task>
+    <task id="LOCAL-00004" summary="I added a view to be able to view all of the uploads, and also be able to delete them">
+      <created>1618342113896</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618342113896</updated>
+    </task>
+    <task id="LOCAL-00005" summary="I added all of my edited files into a new appfile so there would be less conflict">
+      <created>1618508182493</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618508182493</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,6 +151,13 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+
+    <MESSAGE value="added some function to submit loaded form to a static file on local computer called media" />
+    <MESSAGE value="fixed up some functions and view and update html" />
+    <MESSAGE value="I added a view to be able to view all of the uploads, and also be able to delete them" />
+    <MESSAGE value="I added all of my edited files into a new appfile so there would be less conflict" />
+    <option name="LAST_COMMIT_MESSAGE" value="I added all of my edited files into a new appfile so there would be less conflict" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+
   </component>
 </project>

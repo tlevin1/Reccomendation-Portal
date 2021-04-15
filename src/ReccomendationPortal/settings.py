@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'LOR.apps.LorConfig',
+    'Upload.apps.UploadConfig',
     'requestor_manage.apps.RequestorManageConfig',
     'Authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
@@ -40,12 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SITE_ID = 1
 
@@ -131,6 +134,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 AUTHENTICATION_BACKENDS = (
  'django.contrib.auth.backends.ModelBackend',
  'allauth.account.auth_backends.AuthenticationBackend',
@@ -149,6 +156,7 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
 
 '''
 fields.W342 recommends using onetoonefield instead of ForeignKey

@@ -87,3 +87,4 @@ class UpdateRequest(models.Model):
 #models for accepting/denying student request
     def __str__(self):
         return str(self.name) + " " + str(self.answer)+ " " + str(self.A_date)
+

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from .models import LOR, Req_a
 from datetime import datetime
@@ -9,7 +10,6 @@ from . import models
 from . import form
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
 
 # stub for home page
 def index(request):
@@ -121,6 +121,7 @@ def writer_req(request):
     #form = ReqForm()
 
     answer = Req_a.objects.all()
+
     if request.method == 'POST':
             req = Req_a.objects.get(name=request.POST.get('name'))
             if(request.POST.get('status')):
