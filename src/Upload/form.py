@@ -5,3 +5,4 @@ class Uploadform(forms.ModelForm):
     class Meta:
         model = Upload
         fields = ('name', 'type', 'pdf')
+        #uses model Upload
