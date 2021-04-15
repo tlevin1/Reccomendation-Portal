@@ -118,6 +118,5 @@ class TestURL(TestCase):
 
     def test_requests_url(self):
         url = reverse('writer_req')
-        print((resolve(url)))
         self.assertEqual(resolve(url).func, writer_req)
         #test to see if it is correct url

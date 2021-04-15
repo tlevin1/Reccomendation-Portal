@@ -1,0 +1,49 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}
+    <title>Requester Dashboard</title>
+{% endblock %}
+
+{% block content %}
+<h1>Requester Dashboard</h1>
+
+<form action="" method="POST">{% csrf_token %}
+
+<button type="submit" name="New Request" value="New Request"><b>New Request</b></button>
+<button type="submit" name="Review" value="Review"><b>Review</b></button>
+<button type="submit" name="Withdraw" value="Withdraw"><b>Withdraw</b></button>
+
+<table>
+    <tr>
+        <th style="width:2%"></th>
+        <th>Requester Email</th>
+        <th>Status</th>
+        <th>Due Date</th>
+        <th>Requested On</th>
+        <th>Position</th>
+    </tr>
+    {% for lor in sorted_lors %}
+    <tr>
+        <td>
+            <label><input type="checkbox" name="sel_box" value="{{ lor.id }}"/>
+            </label>
+        </td>
+        <td>
+            {{ lor.writer_email }}
+        </td>
+        <td>
+            {{ lor.status }}
+        </td>
+        <td>
+            {{ lor.due_date }}
+        </td>
+        <td>
+            {{ lor.request_date }}
+        </td>
+        <td>
+            {{ lor.position }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</form>
+{% endblock %}

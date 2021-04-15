@@ -72,6 +72,19 @@ class Req_a(models.Model):
     R_date = models.DateField(blank=True)
     A_date = models.DateField(default=datetime.now())
 
+class UpdateRequest(models.Model):
+    position = models.CharField(max_length=100, blank=True, null=True)
+    due_date = models.DateField(max_length=100, blank=False, null=False)
+    writer_name = models.CharField(max_length=100, blank=False, null=False, choices=Proffesors)
+    writer_email = models.EmailField(max_length=200, blank=True, null=True)
+    company_name = models.CharField(max_length=100, blank=False, null=False, default= "")
+    company_website = models.URLField(max_length=100, blank=True, null=True)
+    company_email = models.EmailField(max_length=100, blank=True, null=True)
+    company_recipients = models.CharField(max_length=200, blank=True, null=True)
+    resume = models.URLField(max_length=100, blank=True, null=True)
+
+
 #models for accepting/denying student request
     def __str__(self):
         return str(self.name) + " " + str(self.answer)+ " " + str(self.A_date)
+
