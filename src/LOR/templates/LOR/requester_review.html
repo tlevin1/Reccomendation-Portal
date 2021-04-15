@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Requestor Dashboard</title>
+    <style>
+        button {
+            background-color: rgb(176, 245, 231);
+            border: 1px solid black;
+            font-size: 15px;
+            border-radius: 4px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #fefbd8;
+        }
+        tr:nth-child(even){
+            background-color: rgb(222, 235, 247);
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center;font-size:300%;">Requester Dashboard</h1>
+
+<form action="{% url 'request_page' %}" method="POST">{% csrf_token %}
+
+<button type="submit" name="New Request" value="New Request"><b>New Request</b></button>
+
+    <form action="{% url 'request_page' %}" method="POST">{% csrf_token %}
+<button type="submit" name="Review/Update" value="Review/Update"><b>Review/Update</b></button> </form>
+<button type="Withdraw" name="Withdraw" value="Withdraw"><b>Withdraw</b></button>
+
+
+<table>
+    <tr>
+        <th style="width:2%"></th>
+        <th>Professor
+        <td><input type="checkbox" /></td></th>
+       <th>Status
+        <td><input type="checkbox" /></td></th>
+        <th>Due Date
+        <td><input type="checkbox" /></td></th>
+       <th>Position
+        <td><input type="checkbox" /></td></th>
+    </tr>
+    {% for lor in objs %}
+    <tr>
+        <td>
+
+            <label><input type="checkbox" name="sel_box" value="{{ lor.id }}"/>
+            </label>
+        </td>
+ <td>
+            {{ lor.writer_email }}
+        </td>
+        <td>
+        </td>
+        <td>
+            {{ lor.status }}
+        </td>
+         <td>
+        </td>
+        <td>
+            {{ lor.due_date }}
+        </td>
+         <td>
+        </td>
+        <td>
+            {{ lor.position }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</form>
+</body>
+</html>
