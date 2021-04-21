@@ -14,6 +14,7 @@ from django.urls import reverse
 # stub for home page
 def index(request):
     return HttpResponse('Letters of Recommendation index')
+    # return render(request, 'index.html')
 
 
 # Change request status to given new status if current status isn't in invalid_sel list
@@ -48,10 +49,25 @@ def writer_view(request):
             # Check which button is pressed
             if 'Accept' in request.POST:
                 print('Accept Button pressed')
+                new_status = 'Accepted'
+                invalid_sel = {'Completed', 'Withdrawn'}
+                errmsg = 'Unable to accept a completed or withdrawn request'
+                if change_status(sel_ids, invalid_sel, new_status):
+                    messages.info(request, errmsg)
             elif 'Deny' in request.POST:
                 print('Deny Button pressed')
+                new_status = 'Denied'
+                invalid_sel = {'Completed', 'Withdrawn'}
+                errmsg = 'Unable to deny a withdrawn or completed request'
+                if change_status(sel_ids, invalid_sel, new_status):
+                    messages.info(request, errmsg)
             elif 'Complete' in request.POST:
                 print('Complete Button pressed')
+                new_status = 'Completed'
+                invalid_sel = {'Withdrawn', 'Denied'}
+                errmsg = 'Unable to complete a withdrawn or denied request'
+                if change_status(sel_ids, invalid_sel, new_status):
+                    messages.info(request, errmsg)
             elif 'Review' in request.POST:
                 print('Review Button pressed')
 
