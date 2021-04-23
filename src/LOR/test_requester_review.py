@@ -51,44 +51,44 @@ class RequesterViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'LOR/requester_review.html')
 
-    #def test_view_has_requester_specific_sorted_data(self):
+    def test_view_has_requester_specific_sorted_data(self):
         # Log in the first requester
-        #login = self.client.login(username='r_user1', password='pass1')
-        #response = self.client.get(reverse('requester_review'))
+        login = self.client.login(username='r_user1', password='pass1')
+        response = self.client.get(reverse('requester_review'))
 
         # Check that requester is logged in
-        #self.assertEqual(str(response.context['user']), 'r_user1')
+        self.assertEqual(str(response.context['user']), 'r_user1')
 
         # Check that received a response "success"
-        #self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         # Check that  two requests
-        #self.assertTrue(len(response.context['sorted_lors']) == 2)
+        self.assertTrue(len(response.context['sorted_lors']) == 2)
 
         # Check that the requests are in sorted order by due date
-        #last_date = 0
-        #for lor in response.context['sorted_lors']:
-            #if last_date == 0:
-                #last_date = lor.due_date
-            #else:
-                #self.assertTrue(last_date <= lor.due_date)
-                #last_date = lor.due_date
+        last_date = 0
+        for lor in response.context['sorted_lors']:
+            if last_date == 0:
+                last_date = lor.due_date
+            else:
+                self.assertTrue(last_date <= lor.due_date)
+                last_date = lor.due_date
 class TestViews(TestCase):
 
 
     def test_request_view(self):
         self.client = Client()
-        #self.req_url = reverse('requester_review')
+        self.req_url = reverse('requester_review')
 
-        #response = self.client.get(reverse('requester_review'))
-        #self.assertEquals(response.status_code, 302)
-        #self.assertTemplateUsed(response, 'LOR/requester_review.html')
+        response = self.client.get(reverse('requester_review'))
+        self.assertEquals(response.status_code, 302)
+        self.assertTemplateUsed(response, 'LOR/requester_review.html')
     #testing to see if there is a 200 response
 
-# class TestURL(TestCase):
+class TestURL(TestCase):
 
-    # def test_requester_url(self):
-    #     url = reverse('req_view')
-    #     print((resolve(url)))
-    #     self.assertEqual(resolve(url).func, requester_view)
-    #     #test to see if it is correct url
+    def test_requester_url(self):
+        url = reverse('req_view')
+        print((resolve(url)))
+        self.assertEqual(resolve(url).func, requester_view)
+        #test to see if it is correct url
