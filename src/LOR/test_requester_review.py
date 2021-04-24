@@ -4,6 +4,7 @@ from Authentication.models import LorUser as User
 from datetime import datetime
 from LOR.models import LOR, Req_a
 from LOR.views import requester_view
+from LOR.views import requester_review
 
 
 class RequesterViewTest(TestCase):
@@ -48,7 +49,7 @@ class RequesterViewTest(TestCase):
         login = self.client.login(username='r_user1', password='pass1')
         response = self.client.get(reverse('requester_view'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'requester_review.html')
+        self.assertTemplateUsed(response, 'LOR/requester_review.html')
 
     def test_view_has_requester_specific_sorted_data(self):
         # Log in the first requester
