@@ -1,6 +1,6 @@
 {% extends 'dashboard_base.html' %}
 {% block title %}
-    <title>Requester Dashboard</title>
+   <title>Requester Dashboard</title>
 {% endblock %}
 
 {% block content %}
@@ -13,37 +13,37 @@
 <button type="submit" name="Withdraw" value="Withdraw"><b>Withdraw</b></button>
 
 <table>
-    <tr>
-        <th style="width:2%"></th>
-        <th>Writer Email</th>
-        <th>Status</th>
-        <th>Due Date</th>
-        <th>Requested On</th>
-        <th>Position</th>
-    </tr>
-    {% for lor in sorted_lors %}
-    <tr>
-        <td>
-            <label><input type="checkbox" name="sel_box" value="{{ lor.id }}"/>
-            </label>
-        </td>
-        <td>
-            {{ lor.writer_email }}
-        </td>
-        <td>
-            {{ lor.status }}
-        </td>
-        <td>
-            {{ lor.due_date }}
-        </td>
-        <td>
-            {{ lor.request_date }}
-        </td>
-        <td>
-            {{ lor.position }}
-        </td>
-    </tr>
-    {% endfor %}
+   <tr>
+       <th style="width:2%"></th>
+       <th>Writer Email</th>
+       <th>Status</th>
+       <th>Due Date</th>
+       <th>Requested On</th>
+       <th>Position</th>
+   </tr>
+   {% for lor in sorted_lors %}
+   <tr>
+       <td>
+           <label><input type="checkbox" name="sel_box" value="{{ lor.id }}"/>
+           </label>
+       </td>
+       <td>
+           {{ lor.writer_email }}
+       </td>
+       <td>
+           {{ lor.status }}
+       </td>
+       <td>
+           {{ lor.due_date }}
+       </td>
+       <td>
+           {{ lor.request_date }}
+       </td>
+       <td>
+           {{ lor.position }}
+       </td>
+   </tr>
+   {% endfor %}
 </table>
 </form>
 {% endblock %}

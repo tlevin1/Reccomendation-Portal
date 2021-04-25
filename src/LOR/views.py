@@ -11,10 +11,24 @@ from . import form
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-# stub for home page
+# display home page
 def index(request):
-    return HttpResponse('Letters of Recommendation index')
-    # return render(request, 'index.html')
+   cur_user = request.user
+   # print(cur_user.email)
+   # determine number of requests user made and number of user's actions to write a recommendation
+   if cur_user.is_authenticated:
+       numRequests = LOR.objects.filter(requester_email=cur_user.email).count()
+       numActions = LOR.objects.filter(writer_email=cur_user.email).count()
+       print(numRequests, numActions)
+   else:
+       numRequests = -1
+       numActions = -1
+   context = {
+       "numRequests": numRequests,
+       "numActions": numActions,
+   }
+   # return HttpResponse('Letters of Recommendation index')
+   return render(request, 'index.html', context)
 
 
 # Change request status to given new status if current status isn't in invalid_sel list
@@ -35,81 +49,83 @@ def change_status(sel_ids, invalid_sel, new_status):
 # actions are: accept, deny, review, complete
 @login_required
 def writer_view(request):
-    print(request.method)
-    cur_user = request.user
-    print("Logged in user is ", cur_user)
+   print(request.method)
+   cur_user = request.user
+   print("Logged in user is ", cur_user)
 
-    if request.method == 'POST':
-        # Get the list of ids associated with selected table rows
-        if not request.POST.getlist('sel_box'):
-            messages.info(request, 'Nothing Selected')
-            # print('Nothing selected')
-        else:
-            sel_ids = request.POST.getlist('sel_box')
-            # Check which button is pressed
-            if 'Accept' in request.POST:
-                print('Accept Button pressed')
-                new_status = 'Accepted'
-                invalid_sel = {'Completed', 'Withdrawn'}
-                errmsg = 'Unable to accept a completed or withdrawn request'
-                if change_status(sel_ids, invalid_sel, new_status):
-                    messages.info(request, errmsg)
-            elif 'Deny' in request.POST:
-                print('Deny Button pressed')
-                new_status = 'Denied'
-                invalid_sel = {'Completed', 'Withdrawn'}
-                errmsg = 'Unable to deny a withdrawn or completed request'
-                if change_status(sel_ids, invalid_sel, new_status):
-                    messages.info(request, errmsg)
-            elif 'Complete' in request.POST:
-                print('Complete Button pressed')
-                new_status = 'Completed'
-                invalid_sel = {'Withdrawn', 'Denied'}
-                errmsg = 'Unable to complete a withdrawn or denied request'
-                if change_status(sel_ids, invalid_sel, new_status):
-                    messages.info(request, errmsg)
-            elif 'Review' in request.POST:
-                print('Review Button pressed')
+   if request.method == 'POST':
+       # Get the list of ids associated with selected table rows
+       if not request.POST.getlist('sel_box'):
+           messages.info(request, 'Nothing Selected')
+           # print('Nothing selected')
+       else:
+           sel_ids = request.POST.getlist('sel_box')
+           # Check which button is pressed
+           if 'Accept' in request.POST:
+               print('Accept Button pressed')
+               new_status = 'Accepted'
+               invalid_sel = {'Completed', 'Withdrawn'}
+               errmsg = 'Unable to accept a completed or withdrawn request'
+               if change_status(sel_ids, invalid_sel, new_status):
+                   messages.info(request, errmsg)
+           elif 'Deny' in request.POST:
+               print('Deny Button pressed')
+               new_status = 'Denied'
+               invalid_sel = {'Completed', 'Withdrawn'}
+               errmsg = 'Unable to deny a withdrawn or completed request'
+               if change_status(sel_ids, invalid_sel, new_status):
+                   messages.info(request, errmsg)
+           elif 'Complete' in request.POST:
+               print('Complete Button pressed')
+               new_status = 'Completed'
+               invalid_sel = {'Withdrawn', 'Denied'}
+               errmsg = 'Unable to complete a withdrawn or denied request'
+               if change_status(sel_ids, invalid_sel, new_status):
+                   messages.info(request, errmsg)
+           elif 'Review' in request.POST:
+               print('Review Button pressed')
 
-    # for POST or GET, get logged in writer's requests sorted by due date
-    sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
-    context = {"sorted_lors": sorted_lors}
-    return render(request, 'writer_view.html', context)
+   # for POST or GET, get logged in writer's requests sorted by due date
+   sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
+   context = {"sorted_lors": sorted_lors}
+   return render(request, 'writer_view.html', context)
 
 
 # display requester dashboard
 # actions are: New Request, Review, Withdraw
 @login_required
 def requester_view(request):
-    print(request.method)
-    cur_user = request.user
-    print("Logged in user is ", cur_user)
+   print(request.method)
+   cur_user = request.user
+   print("Logged in user is ", cur_user)
 
-    if request.method == 'POST':
-        # Get the list of ids associated with selected table rows
-        if not request.POST.getlist('sel_box'):
-            messages.info(request, 'Nothing selected')
-            # print('Nothing selected')
-        else:
-            sel_ids = request.POST.getlist('sel_box')
-            # Check which button is pressed
-            if 'New Request' in request.POST:
-                print('New Request Button pressed')
-            elif 'Review' in request.POST:
-                print('Review Button pressed')
-            elif 'Withdraw' in request.POST:
-                # change status to withdrawn if status is not already completed
-                print('Withdraw Button pressed')
-                new_status = 'Withdrawn'
-                invalid_sel = {'Completed'}
-                errmsg = 'Unable to withdraw a completed request'
-                if change_status(sel_ids, invalid_sel, new_status):
-                    messages.info(request, errmsg)
+   if request.method == 'POST':
+       # Get the list of ids associated with selected table rows
+       if 'New Request' in request.POST:
+           print('New Request Button pressed')
+           return redirect(view_enter_request)
 
-    # for POST or GET, get logged in user's requests sorted by due date
-    sorted_lors = LOR.objects.filter(requester_email=cur_user.email).order_by("due_date")
-    context = {"sorted_lors": sorted_lors}
-    return render(request, 'requester_view.html', context)
+       if not request.POST.getlist('sel_box'):
+           messages.info(request, 'Nothing selected')
+           # print('Nothing selected')
+       else:
+           sel_ids = request.POST.getlist('sel_box')
+           # Check which button is pressed
+           if 'Review' in request.POST:
+               print('Review Button pressed')
+           elif 'Withdraw' in request.POST:
+               # change status to withdrawn if status is not already completed
+               print('Withdraw Button pressed')
+               new_status = 'Withdrawn'
+               invalid_sel = {'Completed'}
+               errmsg = 'Unable to withdraw a completed request'
+               if change_status(sel_ids, invalid_sel, new_status):
+                   messages.info(request, errmsg)
+
+   # for POST or GET, get logged in user's requests sorted by due date
+   sorted_lors = LOR.objects.filter(requester_email=cur_user.email).order_by("due_date")
+   context = {"sorted_lors": sorted_lors}
+   return render(request, 'requester_view.html', context)
 
 '''
 def view_enter_request(request):
@@ -125,7 +141,8 @@ def view_enter_request(request):
     obj = form.RequestForm(request.POST or None)
     if obj.is_valid():
         obj.save()
-        return http.HttpResponseRedirect('/')
+        # return http.HttpResponseRedirect('/')
+        return redirect(requester_view)
 
     request_form = {
         "object": obj
