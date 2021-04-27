@@ -11,6 +11,11 @@ from . import form
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+#added for writer db
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
+
+
 # stub for home page
 def index(request):
     return HttpResponse('Letters of Recommendation index')

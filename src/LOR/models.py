@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.timezone import now
 from datetime import datetime
 from Authentication.models import LorUser as User
+#added for writers
+#from django.contrib.auth.models import User
 
 #add proffesor in future, right now it is just a sample
 Proffesors= [
@@ -82,6 +84,12 @@ class UpdateRequest(models.Model):
     company_email = models.EmailField(max_length=100, blank=True, null=True)
     company_recipients = models.CharField(max_length=200, blank=True, null=True)
     resume = models.URLField(max_length=100, blank=True, null=True)
+
+    # added for writers
+class ProffesorWriters(models.Model):
+    user = models.EmailField()
+    writer = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 #models for accepting/denying student request
