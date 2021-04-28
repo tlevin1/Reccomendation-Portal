@@ -64,20 +64,6 @@ class Index_HomePageTest(TestCase):
        self.assertTemplateUsed(response, 'index.html')
 
 
-   # def test_index_homepage_links_to_dashboards(self):
-       # Log in as user1
-       # login = self.client.login(username='user1', password='justapwd12')
-       # response = self.client.get(reverse('index'))
-       # self.assertEqual(response.status_code, 200)
-
-       # self.assertContains(response, 'Requester Dashboard' % reverse("requester_view"))
-       # self.assertContains(response, 'Writer Dashboard' % reverse("writer_view"))
-       #link = '<a href="%s">Requester Dashboard</a>' % reverse("requester_view")
-
-       # self.assertContains(response, 'href="{% url "requester_view" %}">Requester Dashboard')
-       # self.assertContains(response, 'href="{% url "writer_view" %}">Writer Dashboard')
-
-
    def test_index_homepage_no_stats_if_not_logged_in(self):
        response = self.client.get(reverse('index'))
        self.assertEqual(response.status_code, 200)
