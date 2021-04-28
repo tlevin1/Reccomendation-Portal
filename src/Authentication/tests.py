@@ -12,6 +12,7 @@ class LORRoleModelTest(TestCase):
         LorUser.objects.create(username='testuser1',first_name='admin', email='adminperson@umbc.edu', role=UserRoles.ADMIN, position="student")
         LorUser.objects.create(username='testuser2',name_title='Dr', first_name='Harriet', last_name='Tubman', email='htubman@umbc.edu', role=UserRoles.WRITER, position="abolitionist")
         LorUser.objects.create(username='testuser3',name_title='Dr', first_name='Katherine', last_name='Johnson', email='kjohnson@umbc.edu', role=UserRoles.WRITER, position="mathematician")
+        LorUser.objects.create(username='testuser6',name_title='Dr', first_name='Freeman', last_name='Hrabowski', email='hrabowski@umbc.edu', role=UserRoles.WRITER, position="president")
         LorUser.objects.create(username='testuser4',first_name='Bob', email='bob@umbc.edu', role=UserRoles.REQUESTER, position="student")
         LorUser.objects.create(username='testuser5',first_name='John', email='john@umbc.edu', role=UserRoles.REQUESTER, position="alumni")
 
@@ -99,19 +100,20 @@ class LORRoleModelTest(TestCase):
         self.assertEqual(jhons_request_recipients[0].recipient_name, 'Barack Obama')
         self.assertEqual(jhons_request_recipients[1].company_email, 'jbiden@us.gov')
 
-class LORUserTest(TestCase):
-    date_now = datetime.now()
-    date_future = date_now + timedelta(days=30)
+    def test_get_writer_users(self):
+        writers_count = len(LorUser.objects.filter(role=UserRoles.WRITER))
+        self.assertEqual(3, writers_count)
 
-    @classmethod
-    def setUpTestData(cls):
-        LorUser.objects.create(username='testuser1', first_name='admin', email='adminperson@umbc.edu',
-                               role=UserRoles.ADMIN, position="student")
-        LorUser.objects.create(username='testuser2', name_title='Dr', first_name='Harriet', last_name='Tubman',
-                               email='htubman@umbc.edu', role=UserRoles.WRITER, position="abolitionist")
-        LorUser.objects.create(username='testuser3', name_title='Dr', first_name='Katherine', last_name='Johnson',
-                               email='kjohnson@umbc.edu', role=UserRoles.WRITER, position="mathematician")
-        LorUser.objects.create(username='testuser4', first_name='Bob', email='bob@umbc.edu', role=UserRoles.REQUESTER,
-                               position="student")
-        LorUser.objects.create(username='testuser5', first_name='John', email='john@umbc.edu', role=UserRoles.REQUESTER,
-                               position="alumni")
+    def test_get_admin_name(self):
+        writer_first = LorUser.objects.filter(role=UserRoles.WRITER).first()
+        writer_last = LorUser.objects.filter(role=UserRoles.WRITER, first_name='Freeman').first()
+        self.assertEqual(str("Harriet Tubman"), writer_first.get_full_name())
+        self.assertEqual(str("Hrabowski"), writer_last.get_last_name())
+
+    def test_get_requester_count(self):
+        requester_count = len(LorUser.objects.filter(role=UserRoles.REQUESTER))
+        self.assertEqual(2, requester_count)
+
+    def test_get_admin_count(self):
+        admin_count = len(LorUser.objects.filter(role=UserRoles.ADMIN))
+        self.assertEqual(1, admin_count)
