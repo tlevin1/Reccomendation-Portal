@@ -1,18 +1,11 @@
+
 from django.test import TestCase
+#from django.urls import reverse
+#from Authentication.models import LorUser as User
+from LOR.models import LOR, Req_a
+# from .models import LOR
+from LOR.views import writer_req, writer_view, requester_view
 
-from .models import *
-
-from django.test import TestCase, Client
-from django.urls import reverse, resolve
-from Authentication.models import LorUser as User
-from datetime import datetime
-from .models import LOR, Req_a
-from .views import writer_req
-from django.test import TestCase, Client
-from .models import LOR, Req_a
-from datetime import datetime
-from django.urls import resolve, reverse
-from .views import writer_req
 
 class DatabaseTests(TestCase):
     def test_the_basics(self):
