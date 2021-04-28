@@ -83,8 +83,6 @@ class Index_HomePageTest(TestCase):
        self.assertEqual(response.status_code, 200)
        self.assertTrue(response.context['numRequests'] == -1)
        self.assertTrue(response.context['numActions'] == -1)
-       # self.assertNotContains(response, 'Your requests:')
-       # self.assertNotContains(response, 'Your writer actions:')
 
 
    def test_index_homepage_stats_if_logged_in(self):
@@ -94,5 +92,3 @@ class Index_HomePageTest(TestCase):
        self.assertEqual(response.status_code, 200)
        self.assertTrue(response.context['numRequests'] == 2)
        self.assertTrue(response.context['numActions'] == 1)
-       # self.assertNotContains(response, 'Your requests:')
-       # self.assertNotContains(response, 'Your writer actions:')
