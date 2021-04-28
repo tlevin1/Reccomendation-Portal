@@ -41,10 +41,10 @@ class LorUser(AbstractUser):
         return str(self.first_name) + " " + str(self.last_name)
 
     def get_first_name(self):
-        return str(self.first_name);
+        return str(self.first_name)
 
     def get_last_name(self):
-        return str(self.last_name);
+        return str(self.last_name)
 
     def get_role(self):
         return self.role

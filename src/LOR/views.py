@@ -10,6 +10,8 @@ from . import models
 from . import form
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from Authentication.models import LorUser as User
+from Authentication.models import UserRoles as Roles
 
 # stub for home page
 def index(request):
@@ -107,6 +109,8 @@ def view_enter_request(request):
 
 def view_enter_request(request):
     obj = form.RequestForm(request.POST or None)
+    obj.fields['requester_fk'].queryset = User.objects.filter(role=Roles.REQUESTER)
+    obj.fields['writer_fk'].queryset = User.objects.filter(role=Roles.WRITER)
     if obj.is_valid():
         obj.save()
         return http.HttpResponseRedirect('/')
