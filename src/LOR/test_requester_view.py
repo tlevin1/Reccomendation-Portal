@@ -1,9 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from Authentication.models import LorUser as User
-from Authentication.models import UserRoles as Roles
 from .models import LOR
-from django.shortcuts import render
 
 class RequesterViewTest(TestCase):
 
@@ -32,8 +30,9 @@ class RequesterViewTest(TestCase):
                            resume='tbd', transcript='tbd', additional_info='none')
 
         # create two users
-        r_user1 = User.objects.create_user(username='r_user1', email='r1@umbc.edu', password='justapwd12', role=Roles.REQUESTER)
+        r_user1 = User.objects.create_user(username='r_user1', email='r1@umbc.edu', password='justapwd12')
         r_user2 = User.objects.create_user(username='r_user2', email='r2@umbc.edu', password='justapwd12')
+
         r_user1.save()
         r_user2.save()
 
@@ -59,7 +58,7 @@ class RequesterViewTest(TestCase):
         login = self.client.login(username='r_user1', password='justapwd12')
         response = self.client.get(reverse('requester_view'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'LOR/requester_review.html')
+        self.assertTemplateUsed(response, 'requester_view.html')
 
     def test_view_has_requester_specific_sorted_data(self):
         # Log in the first requester
@@ -83,6 +82,7 @@ class RequesterViewTest(TestCase):
             else:
                 self.assertTrue(last_date <= lor.due_date)
                 last_date = lor.due_date
+
 
     def test_nothing_selected(self):
         # test if no selections made in requester dashboard
