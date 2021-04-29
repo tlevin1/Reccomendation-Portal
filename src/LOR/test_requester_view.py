@@ -1,6 +1,6 @@
 from django.test import TestCase
-#from django.urls import reverse
-#from Authentication.models import LorUser as User
+from django.urls import reverse
+from Authentication.models import LorUser as User
 from .models import LOR
 
 class RequesterViewTest(TestCase):
@@ -35,77 +35,77 @@ class RequesterViewTest(TestCase):
 
         r_user1.save()
         r_user2.save()
-    #
-    # def test_view_url_is_at_correct_location(self):
-    #     # Log in the first requester
-    #     login = self.client.login(username='r_user1', password='justapwd12')
-    #     response = self.client.get('/requester/')
-    #     self.assertEqual(response.status_code, 200)
-    #
-    # def test_view_url_redirects_to_home(self):
-    #     # Check redirects to home page if no one is logged in
-    #     response = self.client.get('/requester/')
-    #     self.assertEqual(response.status_code, 302)
-    #
-    # def test_view_url_is_accessible_by_name(self):
-    #     # Log in the first requester
-    #     login = self.client.login(username='r_user1', password='justapwd12')
-    #     response = self.client.get(reverse('requester_view'))
-    #     self.assertEqual(response.status_code, 200)
-    #
-    # def test_view_uses_correct_template(self):
-    #     # Log in the first requester
-    #     login = self.client.login(username='r_user1', password='justapwd12')
-    #     response = self.client.get(reverse('requester_view'))
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'requester_view.html')
-    #
-    # def test_view_has_requester_specific_sorted_data(self):
-    #     # Log in the first requester
-    #     login = self.client.login(username='r_user1', password='justapwd12')
-    #     response = self.client.get(reverse('requester_view'))
-    #
-    #     # Check that our requester is logged in
-    #     self.assertEqual(str(response.context['user']), 'r_user1')
-    #
-    #     # Check that we got a response "success"
-    #     self.assertEqual(response.status_code, 200)
-    #
-    #     # Check that we got two requests for the requester
-    #     self.assertTrue(len(response.context['sorted_lors']) == 2)
-    #
-    #     # Check that the requests are in sorted order by due date
-    #     last_date = 0
-    #     for lor in response.context['sorted_lors']:
-    #         if last_date == 0:
-    #             last_date = lor.due_date
-    #         else:
-    #             self.assertTrue(last_date <= lor.due_date)
-    #             last_date = lor.due_date
-    #
-    #
-    # def test_nothing_selected(self):
-    #     # test if no selections made in requester dashboard
-    #     login = self.client.login(username='r_user1', password='justapwd12')
-    #     sel_box = []
-    #     response = self.client.post('/requester/', data={"sel_box": sel_box})
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertContains(response, 'Nothing selected')
-    #
-    #
-    # def test_withdraw(self):
-    #     login = self.client.login(username='r_user1', password='justapwd12')
-    #     sel_box = [1, 3]
-    #     context = {
-    #         "Withdraw": "Withdraw",
-    #         "sel_box": sel_box
-    #     }
-    #     response = self.client.post('/requester/', data=context)
-    #     self.assertEqual(response.status_code, 200)
-    #
-    #     # test error msg is sent if attempting to withdraw a completed request
-    #     self.assertContains(response, 'Unable to withdraw a completed request')
-    #
-    #     # test that request can be withdrawn (id=1 has valid Pending status)
-    #     lor = LOR.objects.get(id=sel_box[0])
-    #     self.assertEqual(lor.status, "Withdrawn")
+
+    def test_view_url_is_at_correct_location(self):
+        # Log in the first requester
+        login = self.client.login(username='r_user1', password='justapwd12')
+        response = self.client.get('/requester/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_url_redirects_to_home(self):
+        # Check redirects to home page if no one is logged in
+        response = self.client.get('/requester/')
+        self.assertEqual(response.status_code, 302)
+
+    def test_view_url_is_accessible_by_name(self):
+        # Log in the first requester
+        login = self.client.login(username='r_user1', password='justapwd12')
+        response = self.client.get(reverse('requester_view'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        # Log in the first requester
+        login = self.client.login(username='r_user1', password='justapwd12')
+        response = self.client.get(reverse('requester_view'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'requester_view.html')
+
+    def test_view_has_requester_specific_sorted_data(self):
+        # Log in the first requester
+        login = self.client.login(username='r_user1', password='justapwd12')
+        response = self.client.get(reverse('requester_view'))
+
+        # Check that our requester is logged in
+        self.assertEqual(str(response.context['user']), 'r_user1')
+
+        # Check that we got a response "success"
+        self.assertEqual(response.status_code, 200)
+
+        # Check that we got two requests for the requester
+        self.assertTrue(len(response.context['sorted_lors']) == 2)
+
+        # Check that the requests are in sorted order by due date
+        last_date = 0
+        for lor in response.context['sorted_lors']:
+            if last_date == 0:
+                last_date = lor.due_date
+            else:
+                self.assertTrue(last_date <= lor.due_date)
+                last_date = lor.due_date
+
+
+    def test_nothing_selected(self):
+        # test if no selections made in requester dashboard
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = []
+        response = self.client.post('/requester/', data={"sel_box": sel_box})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Nothing selected')
+
+
+    def test_withdraw(self):
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = [1, 3]
+        context = {
+            "Withdraw": "Withdraw",
+            "sel_box": sel_box
+        }
+        response = self.client.post('/requester/', data=context)
+        self.assertEqual(response.status_code, 200)
+
+        # test error msg is sent if attempting to withdraw a completed request
+        self.assertContains(response, 'Unable to withdraw a completed request')
+
+        # test that request can be withdrawn (id=1 has valid Pending status)
+        lor = LOR.objects.get(id=sel_box[0])
+        self.assertEqual(lor.status, "Withdrawn")
