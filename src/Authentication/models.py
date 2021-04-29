@@ -37,6 +37,18 @@ class LorUser(AbstractUser):
     position = models.CharField(max_length=100,null=True, blank=True)
     password = models.CharField(_('password'),max_length=128,null=True,blank=True)
 
+    def get_full_name(self):
+        return str(self.first_name) + " " + str(self.last_name)
+
+    def get_first_name(self):
+        return str(self.first_name)
+
+    def get_last_name(self):
+        return str(self.last_name)
+
+    def get_role(self):
+        return self.role
+
 
 class LorRequest(models.Model):
     request_name = models.CharField(max_length=100)

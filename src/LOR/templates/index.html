@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-US">
+<head>
+  <title>Letters of Recommendation</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div class=container>
+  <img style="float:left; margin-right:10px;" width="100" height="100" src="{% static 'umbc.jpg' %}" alt="UMBC logo"/>
+  <h4 style="font-size:200%; vertical-align:middle;">Welcome to the UMBC Letters of Recommendation Portal<br/>
+  <a style="align:center; margin-left:50px; margin-right:50px; font-size:60%;" href="{% url 'requester_view' %}">Requester Dashboard</a>
+  <a style="margin-right:50px; font-size:60%;" href="{% url 'writer_view' %}">Writer Dashboard</a>
+  <a style="margin-right:50px; font-size:60%;" href="{% url 'Authentication' %}">
+    {% if user.is_authenticated %}
+        Log Out
+    {% else %}
+        Sign In
+    {% endif %}
+  </a></h5></h4>
+
+  {% if user.is_authenticated %}
+      <h3 style="color:green;">Your requests: {{ numRequests }}<br/>
+      Your writer actions: {{ numActions }}</h3>
+  {% endif %}
+
+  <h2>What is a letter of recommendation?</h2>
+  A letter of recommendation is a letter written and signed by someone who can vouch for your skill, performance and
+  character traits in relation to a job, position, or admission to a higher education program, such as a masters or doctoral.
+  Recommendation letters are typically emailed directly to a hiring manager.
+
+  <h2>Students:</h2>
+  Are you applying for a new job or higher education and need a letter of recommendation from your teachers?<br/>
+  Log in or Register to request a recommendation. It's that simple!
+
+  <h2>Request Tips:</h2>
+  <ul>
+  <li>Use the <b><i>Requester Dashboard</i></b> to submit a new request or check the status of any requests that you have
+      already made.</li>
+  <li>Select a teacher who knows you in a positive way and has knowledge of your skills in relation to the job or
+      position you are seeking</li>
+  <li>Make sure you have the teacher's email address.</li>
+  <li>Be prepared to inlcude all the necessary documentation the teacher may need to write a recommendation:
+      a cover letter, resume, and unofficial transcript is required to be posted with each request.</li>
+  <li><mark><b>Allow at least 3 weeks</b></mark> for the recommender to write your letter. Remember, teachers are busy and
+      interact with many students, so they need time to gather their thoughts about you in particular.</li>
+  <li>Though not a best practice, you may be asked to write your own recommendation for your teacher to sign,
+      especially if the teacher is very busy or the submission due date is looming.</li>
+  <li>The <i>Additional Information</i> section of the request form can be used to communicate information to
+      the teacher. You may want to note the class you took with the teacher. You may also want to include here
+      other information that the teacher may request.</li>
+  <li>Stay in touch with your teacher once your request is accepted. Keep tabs on your request status.</li>
+  <li>Be proactive. If your initial request is denied, request a recommendation from another teacher.</li><br/>
+  <li style="color:red;">If you change your mind and no longer need a letter you previously requested, please remember to withdraw
+      the request via the dashboard.</li>
+  </ul>
+
+  <h2>Teachers:</h2>
+  A big shout out to all teachers participating in this recommendation portal! <b>Thank you</b> in advance for
+  your time and consideration writing letters of recommendation for your students.
+
+  <h2>Writing Tips:</h2>
+  <ul>
+  <li>There are a host of recommendation templates available on the web for reference.</li>
+  <li>Log in/register to access the <b><i>Writer Dashboard</i></b> to review your requests for recommendations.</li>
+  <li>Please record your acceptance or denial in the dashboard at your earliest opportunity, which can provide
+      enough time for the student to make a request to a different teacher.</li>
+  <li>The request will contain the student's email address should you need to contact them directly.</li>
+  <li>Should you request additional information from the student, you may ask the student to provide it in
+      the <i>Additional Information</i> section of their request, keeping all documentation together.</li><br/>
+  <li style="color:red;">When you have finished writing a recommendation, please remember to mark the request as completed
+      via the dashboard.</li>
+  </ul>
+
+</div>
+</body>
+</html>
