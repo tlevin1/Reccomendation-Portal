@@ -174,7 +174,12 @@ def writer_req(request):
 
     return render(request, 'LOR/requests.html', {'answers': answer})
 
-
+def writer_review(request):
+   print("inside")
+   if request.method == 'POST':
+       # close button clicked or no ids passed in, so return to writer dashboard
+       return redirect(writer_view)
+'''
 def writer_review(request):
     #all data
     obj = models.LOR.objects.all()
@@ -193,7 +198,7 @@ def writer_review(request):
     elif 'Next' in request.POST:
         print('Next Button pressed')
     return render(request, 'LOR/writer_review.html', {'objs': obj})
-
+'''
 
 #request review
 @login_required
