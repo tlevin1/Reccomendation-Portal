@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.view_home, name="home"),
     path('', include('Upload.urls')),
+    path('', include('more_info.urls')),
 
 ]
 

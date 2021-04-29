@@ -70,7 +70,7 @@ class Req_a(models.Model):
     name = models.CharField(max_length=100)
     answer = models.CharField(max_length=100, blank=True)
     R_date = models.DateField(blank=True)
-    A_date = models.DateField(default=datetime.now())
+    A_date = models.DateField(blank=True, null=True)
 
 class UpdateRequest(models.Model):
     position = models.CharField(max_length=100, blank=True, null=True)
