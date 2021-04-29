@@ -86,6 +86,10 @@ def writer_view(request):
                    messages.info(request, errmsg)
            elif 'Review' in request.POST:
                print('Review Button pressed')
+               # display full information of selected requests
+               obj = LOR.objects.filter(id__in=sel_ids)
+               return render(request, 'LOR/writer_review.html', {'objs': obj})
+               # return redirect('writer_review', ids=sel_ids)
 
    # for POST or GET, get logged in writer's requests sorted by due date
    sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
