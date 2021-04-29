@@ -10,7 +10,14 @@
   <img style="float:left; margin-right:10px;" width="100" height="100" src="{% static 'umbc.jpg' %}" alt="UMBC logo"/>
   <h4 style="font-size:200%; vertical-align:middle;">Welcome to the UMBC Letters of Recommendation Portal<br/>
   <a style="align:center; margin-left:50px; margin-right:50px; font-size:60%;" href="{% url 'requester_view' %}">Requester Dashboard</a>
-  <a style="margin-right:50px; font-size:60%;" href="{% url 'writer_view' %}">Writer Dashboard</a></h5></h4>
+  <a style="margin-right:50px; font-size:60%;" href="{% url 'writer_view' %}">Writer Dashboard</a>
+  <a style="margin-right:50px; font-size:60%;" href="{% url 'Authentication' %}">
+    {% if user.is_authenticated %}
+        Log Out
+    {% else %}
+        Sign In
+    {% endif %}
+  </a></h5></h4>
 
   {% if user.is_authenticated %}
       <h3 style="color:green;">Your requests: {{ numRequests }}<br/>
