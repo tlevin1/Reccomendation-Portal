@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 INSTALLED_APPS = [
     'LOR.apps.LorConfig',
     'Upload.apps.UploadConfig',
+    'more_info.apps.MoreInfoConfig',
     'requestor_manage.apps.RequestorManageConfig',
     'Authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
