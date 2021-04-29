@@ -12,11 +12,16 @@ urlpatterns = [
     #not sure what this ones for
     path('request/', views.writer_req, name="writer_req"),
     #path('save/', views.view_save_request, name='save'),
+<<<<<<< HEAD
     #writer view for particular request
     #path('writer_rev/', views.writer_review, name="writer_review"),
     #requester dashboard - duplicate? displays db data
   path('req_view/', views.requester_review, name="requester_view"),
     #requester page - writer view
+=======
+    path('writer_rev/', views.writer_review, name="writer_review"),
+  path('req_view/', views.requester_review, name="requester_review"),
+>>>>>>> develop
   path('req_page', views.requester_view_particular_request, name="request_page"),
 ]
 

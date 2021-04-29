@@ -36,9 +36,9 @@ class RequestModel(models.Model):
     resume = models.URLField(max_length=100, blank=True, null=True)
     transcript = models.URLField(max_length=100, blank=True, null=True)
     additional_info = models.TextField(max_length=1000, blank=True, null=True)
-    requester_fk = models.ForeignKey(User, unique=True, blank=True, null=True,
+    requester_fk = models.ForeignKey(User, unique=True, blank=True, null=True, verbose_name='Requester',
                                      related_name="related_requestmodel_requester_id", on_delete=models.CASCADE)
-    writer_fk = models.ForeignKey(User, unique=True, blank=True, null=True,
+    writer_fk = models.ForeignKey(User, unique=True, blank=True, null=True, verbose_name='Writer',
                                   related_name="related_requestmodel_writer_id", on_delete=models.CASCADE)
 
     def __str__(self):

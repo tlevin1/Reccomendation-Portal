@@ -47,7 +47,7 @@ class RequesterViewTest(TestCase):
     def test_view_uses_correct_template(self):
         # Log in the requester
         login = self.client.login(username='r_user1', password='pass1')
-        response = self.client.get(reverse('requester_view'))
+        response = self.client.get(reverse('requester_review'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'LOR/requester_review.html')
 
