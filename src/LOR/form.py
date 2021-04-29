@@ -1,7 +1,8 @@
 from django import forms
 from django.db import models
 from .models import RequestModel
-
+from Authentication.models import LorUser as User
+from Authentication.models import UserRoles as Roles
 
 # Create your form here.
 
@@ -13,6 +14,8 @@ class RequestForm(forms.ModelForm):
             'requester_email',
             'position',
             'due_date',
+            'requester_fk',
+            'writer_fk',
             'writer_name',
             'writer_email',
             'company_name',

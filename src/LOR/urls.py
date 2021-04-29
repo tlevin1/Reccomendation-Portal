@@ -13,7 +13,7 @@ urlpatterns = [
     path('request/', views.writer_req, name="writer_req"),
     #path('save/', views.view_save_request, name='save'),
     #writer view for particular request
-    path('writer_rev/', views.writer_review, name="writer_review"),
+    #path('writer_rev/', views.writer_review, name="writer_review"),
     #requester dashboard - duplicate? displays db data
   path('req_view/', views.requester_review, name="requester_view"),
     #requester page - writer view

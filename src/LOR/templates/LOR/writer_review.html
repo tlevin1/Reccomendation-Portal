@@ -1,53 +1,80 @@
-
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="UTF-8">
-    <title>Request</title>
-    </head>
+   <meta charset="UTF-8">
+   <title>Review Requests</title>
+</head>
 <body>
-<h1 style="text-align: left;font-size:100%;">Requester:
+<h1 style="text-align: center;"></h1>
+<hr>
 {% for obj in objs %}
-{{obj.requester}}
-    </h1>
-<table style="width:100%">
-  <tr>
-    <th style="text-align: left;font-size:100%;">Position:
-{{obj.position}}
-    </th>
-   <th style="text-align: left;font-size:100%;">Due Date:
- {{obj.due_date}}
-    </th>
-    <th style="text-align: left;font-size:100%;">Requested On:
-{{obj.request_date}}
-    </th>
- </tr>
-    <hr>
-  <tr>
-      <td style="text-align: left;font-size:100%;">Writer:
- {{obj.writer_email}}
-    </td>
-      <td style="text-align: left;font-size:100%;">Website:
-{{obj.company_website}}
-    </td>
-  </tr>
-  <tr>
-      <td style="text-align: left;font-size:100%;">Destination:
-{{obj.company_name}}
-    </td>
-      <td style="text-align: left;font-size:100%;">Recipients:
-{{obj.company_recipients}}
-    </td>
-       {% endfor %}
-  </tr>
-</table>
+<h1 style="text-align: left;font-size:100%;">Requester:
 
-<form action="" method="POST">{% csrf_token %}
-    <button type="submit" name="Next" value="Next"style="float: right;"><b>Next</b></button>
- <button type="submit" name="Cover Letter" value="Cover Letter"style="float: right;"><b>Cover Letter</b></button>
-    <button type="submit" name="Additional Information" value="Additional Information"style="float: right;"><b>Additional Info</b></button>
-<button type="submit" name="Transcript" value="Transcript"style="float: right;"><b>Transcript</b></button>
-    <button type="submit" name="Resume" value="Resume"style="float: right;"><b>Resume</b></button>
+{{obj.requester}}
+   </h1>
+<table style="width:100%">
+ <tr>
+     <td style="text-align: left;font-size:100%;">Requester Email:
+{{obj.requester_email}}
+   </td>
+   <td style="text-align: left;font-size:100%;">Position:
+{{obj.position}}
+   </td>
+  <td style="text-align: left;font-size:100%;">Due Date:
+{{obj.due_date}}
+   </td>
+   <td style="text-align: left;font-size:100%;">Requested On:
+{{obj.request_date}}
+   </td>
+</tr>
+
+ <tr>
+     <td style="text-align: left;font-size:100%;">Company:
+{{obj.company_name}}
+   </td>
+     <td style="text-align: left;font-size:100%;">Company Email:
+{{obj.company_email}}
+   </td>
+     <td style="text-align: left;font-size:100%;">Website:
+{{obj.company_website}}
+   </td>
+     <td style="text-align: left;font-size:100%;">Status:
+{{obj.status}}
+   </td>
+ </tr>
+ <tr>
+     <td style="text-align: left;font-size:100%;">Destination:
+{{obj.company_name}}
+   </td>
+     <td style="text-align: left;font-size:100%;">Recipients:
+{{obj.company_recipients}}
+   </td>
+
+ </tr>
+   <tr>
+           <td><label for="resume">Resume</label><br/>
+           <textarea id="Resume" name="Resume" rows="5">{{obj.resume}}</textarea>
+       </td>
+   </tr>
+
+    <tr>
+           <td><label for="transcript">Transcript</label><br/>
+           <textarea id="Transcript" name="Transcript" rows="5">{{obj.transcript}}</textarea>
+       </td>
+   </tr>
+
+    <tr>
+           <td><label for="cover letter">Cover Letter</label><br/>
+           <textarea id="Cover Letter" name="Cover Letter" rows="5">{{obj.cv}}</textarea>
+       </td>
+   </tr>
+
+</table>
+<hr>
+{% endfor %}
+
+<form action="/writer_rev/" method="POST">{% csrf_token %}
+   <button type="submit" name="Close" value="Close"style="float: right;"><b>Close</b></button>
 </form>
 </body>
 </html>

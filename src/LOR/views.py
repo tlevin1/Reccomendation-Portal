@@ -10,6 +10,8 @@ from . import models
 from . import form
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from Authentication.models import LorUser as User
+from Authentication.models import UserRoles as Roles
 
 #added for writer db
 from django.conf import settings
@@ -47,20 +49,39 @@ def writer_view(request):
         # Get the list of ids associated with selected table rows
         if not request.POST.getlist('sel_box'):
             messages.info(request, 'Nothing Selected')
-            # print('Nothing selected')
+                # print('Nothing selected')
         else:
             sel_ids = request.POST.getlist('sel_box')
-            # Check which button is pressed
+                # Check which button is pressed
             if 'Accept' in request.POST:
                 print('Accept Button pressed')
+                new_status = 'Accepted'
+                invalid_sel = {'Completed', 'Withdrawn'}
+                errmsg = 'Unable to accept a completed or withdrawn request'
+                if change_status(sel_ids, invalid_sel, new_status):
+                    messages.info(request, errmsg)
             elif 'Deny' in request.POST:
                 print('Deny Button pressed')
+                new_status = 'Denied'
+                invalid_sel = {'Completed', 'Withdrawn'}
+                errmsg = 'Unable to deny a withdrawn or completed request'
+                if change_status(sel_ids, invalid_sel, new_status):
+                    messages.info(request, errmsg)
             elif 'Complete' in request.POST:
                 print('Complete Button pressed')
+                new_status = 'Completed'
+                invalid_sel = {'Withdrawn', 'Denied'}
+                errmsg = 'Unable to complete a withdrawn or denied request'
+                if change_status(sel_ids, invalid_sel, new_status):
+                    messages.info(request, errmsg)
             elif 'Review' in request.POST:
                 print('Review Button pressed')
+                # display full information of selected requests
+                obj = LOR.objects.filter(id__in=sel_ids)
+                return render(request, 'LOR/writer_review.html', {'objs': obj})
+                # return redirect('writer_review', ids=sel_ids)
 
-    # for POST or GET, get logged in writer's requests sorted by due date
+        # for POST or GET, get logged in writer's requests sorted by due date
     sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
     context = {"sorted_lors": sorted_lors}
     return render(request, 'writer_view.html', context)
@@ -113,13 +134,26 @@ def view_enter_request(request):
 def view_enter_request(request):
     obj = form.RequestForm(request.POST or None)
     if obj.is_valid():
+        print('Good')
         obj.save()
-        return http.HttpResponseRedirect('/')
+        return redirect(requester_view)
 
     request_form = {
         "object": obj
     }
-    return render(request,"LOR/enter_request.html", request_form)
+    return render(request, "LOR/enter_request.html", request_form)
+    # obj = form.RequestForm(request.POST or None)
+    # obj.fields['requester_fk'].queryset = User.objects.filter(role=Roles.REQUESTER)
+    # obj.fields['writer_fk'].queryset = User.objects.filter(role=Roles.WRITER)
+    # if obj.is_valid():
+    #     obj.save()
+    #     # return http.HttpResponseRedirect('/')
+    #     return redirect(requester_view)
+    #
+    # request_form = {
+    #     "object": obj
+    # }
+    # return render(request, "LOR/enter_request.html", request_form)
 
 
 def writer_req(request):
@@ -138,25 +172,74 @@ def writer_req(request):
 
     return render(request, 'LOR/requests.html', {'answers': answer})
 
+#
+# def writer_review(request):
+#     #all data
+#     obj = models.LOR.objects.all()
+#     request_form = {
+#         "object": obj
+#     }
+#     print(obj)
+#     if 'Cover Letter' in request.POST:
+#         print('Cover Letter Button pressed')
+#     elif 'Resume' in request.POST:
+#         print('Resume Button pressed')
+#     elif 'Transcript' in request.POST:
+#         print('Transcript Button pressed')
+#     elif 'Additional Information' in request.POST:
+#         print('Review Button pressed')
+#     elif 'Next' in request.POST:
+#         print('Next Button pressed')
+#     return render(request, 'LOR/writer_review.html', {'objs': obj})
 
-def writer_review(request):
-    #all data
-    obj = models.LOR.objects.all()
-    request_form = {
-        "object": obj
-    }
-    print(obj)
-    if 'Cover Letter' in request.POST:
-        print('Cover Letter Button pressed')
-    elif 'Resume' in request.POST:
-        print('Resume Button pressed')
-    elif 'Transcript' in request.POST:
-        print('Transcript Button pressed')
-    elif 'Additional Information' in request.POST:
-        print('Review Button pressed')
-    elif 'Next' in request.POST:
-        print('Next Button pressed')
-    return render(request, 'LOR/writer_review.html', {'objs': obj})
+# def writer_review(request):
+# def writer_review(request):
+#     def writer_view(request):
+#         print(request.method)
+#         cur_user = request.user
+#         print("Logged in user is ", cur_user)
+#
+#         if request.method == 'POST':
+#             # Get the list of ids associated with selected table rows
+#             if not request.POST.getlist('sel_box'):
+#                 messages.info(request, 'Nothing Selected')
+#                 # print('Nothing selected')
+#             else:
+#                 sel_ids = request.POST.getlist('sel_box')
+#                 # Check which button is pressed
+#                 if 'Accept' in request.POST:
+#                     print('Accept Button pressed')
+#                     new_status = 'Accepted'
+#                     invalid_sel = {'Completed', 'Withdrawn'}
+#                     errmsg = 'Unable to accept a completed or withdrawn request'
+#                     if change_status(sel_ids, invalid_sel, new_status):
+#                         messages.info(request, errmsg)
+#                 elif 'Deny' in request.POST:
+#                     print('Deny Button pressed')
+#                     new_status = 'Denied'
+#                     invalid_sel = {'Completed', 'Withdrawn'}
+#                     errmsg = 'Unable to deny a withdrawn or completed request'
+#                     if change_status(sel_ids, invalid_sel, new_status):
+#                         messages.info(request, errmsg)
+#                 elif 'Complete' in request.POST:
+#                     print('Complete Button pressed')
+#                     new_status = 'Completed'
+#                     invalid_sel = {'Withdrawn', 'Denied'}
+#                     errmsg = 'Unable to complete a withdrawn or denied request'
+#                     if change_status(sel_ids, invalid_sel, new_status):
+#                         messages.info(request, errmsg)
+#                         #Review Redirect
+#                 elif 'Review' in request.POST:
+#                     print('Review Button pressed')
+#                     # display full information of selected requests
+#                     obj = LOR.objects.filter(id__in=sel_ids)
+#                     return render(request, 'LOR/writer_review.html', {'objs': obj})
+#                     # return redirect('writer_review', ids=sel_ids)
+#
+#         # for POST or GET, get logged in writer's requests sorted by due date
+#         sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
+#         context = {"sorted_lors": sorted_lors}
+#         return render(request, 'writer_view.html', context)
 
 
 #request review
