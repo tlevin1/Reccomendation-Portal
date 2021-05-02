@@ -109,3 +109,31 @@ class RequesterViewTest(TestCase):
         # test that request can be withdrawn (id=1 has valid Pending status)
         lor = LOR.objects.get(id=sel_box[0])
         self.assertEqual(lor.status, "Withdrawn")
+
+    def test_review_multiple_requests(self):
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = [1, 3]
+        context = {
+            "Review": "Review",
+            "sel_box": sel_box
+        }
+
+        response = self.client.post('/requester/', data=context)
+        self.assertEqual(response.status_code, 200)
+
+        #test error message is sent if attempting to review more than one request
+        self.assertContains(response, 'Please only select one request to review/update')
+
+    def test_review_single_request(self):
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = [1]
+        context = {
+            "Review": "Review",
+            "sel_box": sel_box
+        }
+
+        response = self.client.post('/requester/', data=context)
+        self.assertEqual(response.status_code, 200)
+
+        # verify correct template is displayed
+        self.assertTemplateUsed(response, 'updateLOR.html')

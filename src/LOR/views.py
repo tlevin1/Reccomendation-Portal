@@ -106,7 +106,6 @@ def requester_view(request):
    print("Logged in user is ", cur_user)
 
    if request.method == 'POST':
-       # Get the list of ids associated with selected table rows
        if 'New Request' in request.POST:
            print('New Request Button pressed')
            return redirect(view_enter_request)
@@ -115,10 +114,22 @@ def requester_view(request):
            messages.info(request, 'Nothing selected')
            # print('Nothing selected')
        else:
+           # Get the list of ids associated with selected table rows
            sel_ids = request.POST.getlist('sel_box')
            # Check which button is pressed
            if 'Review' in request.POST:
                print('Review Button pressed')
+               if len(sel_ids) > 1:
+                   messages.info(request, 'Please only select one request to review/update')
+               else:
+                   # display the form with data from the selected request
+                   print(sel_ids)
+                   lor = LOR.objects.get(id=sel_ids[0])
+                   print(lor)
+                   context = {
+                       'lor': lor
+                   }
+                   return render(request, 'updateLOR.html', context)
            elif 'Withdraw' in request.POST:
                # change status to withdrawn if status is not already completed
                print('Withdraw Button pressed')
@@ -132,6 +143,37 @@ def requester_view(request):
    sorted_lors = LOR.objects.filter(requester_email=cur_user.email).order_by("due_date")
    context = {"sorted_lors": sorted_lors}
    return render(request, 'requester_view.html', context)
+
+
+# review or update a recommendation request
+@login_required
+def updateLOR_view(request):
+    if request.method == "POST":
+        if 'close_request' in request.POST:
+            # no saving form is Close button was pressed
+            return redirect(requester_view)
+        else:
+            # the Save button was pressed
+            id = request.POST.get('id')
+            lor = LOR.objects.get(id=id)
+            print(lor)
+
+            # put fields into LOR and save LOR
+            lor.writer_email = request.POST.get('writer_email')
+            lor.due_date = request.POST.get('due_date')
+            print(lor.due_date)
+            lor.position = request.POST.get('position')
+            lor.company_name = request.POST.get('company_name')
+            lor.company_email = request.POST.get('company_email')
+            lor.company_website = request.POST.get('company_website')
+            lor.company_recipients = request.POST.get('company_recipients')
+            lor.resume = request.POST.get('resume')
+            lor.cv = request.POST.get('cv')
+            lor.transcript = request.POST.get('transcript')
+            lor.additional_info = request.POST.get('additional_info')
+            lor.save()
+            return redirect(requester_view)
+
 
 '''
 def view_enter_request(request):

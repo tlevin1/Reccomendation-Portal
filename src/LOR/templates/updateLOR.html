@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Review or Update Your Request</title>
+    <style>
+        button {
+            background-color: rgb(176, 245, 231);
+            border: 1px solid black;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center;">Review Request</h1>
+<form action="/updateLOR/" method="POST">{% csrf_token %}
+<table style="width:100%">
+ <tr>
+     <td><label for="writer_email">Writer Email: </label>
+         <input type="text" id="writer_email" name="writer_email" value="{{lor.writer_email}}" readonly></td>
+     <td><label for="request_date">Requested On: </label>
+         <input type="date" id="request_date" name="request_date" value="{{lor.request_date}}" readonly></td>
+     <td><label for="position">Position: </label>
+         <input type="text" id="position" name="position" required value="{{lor.position}}"></td>
+     <td><label for="due_date">Due Date (yyyy-mm-dd): </label>
+         <input type="date" id="due_date" name="due_date" required pattern="\d{4}-\d{2}-\d{2}" value="{{lor.due_date}}"></td>
+</tr>
+
+ <tr>
+     <td><label for="company_name">Company Name: </label>
+         <input type="text" id="company_name" name="company_name" required value="{{lor.company_name}}"></td>
+     <td><label for="company_email">Company Email: </label>
+         <input type="email" id="company_email" name="company_email" required value="{{lor.company_email}}"></td>
+     <td><label for="company_website">Company Website: </label>
+         <input type="url" id="company_website" name="company_website" required value="{{lor.company_website}}"></td>
+     <td><label for="company_recipients">Company Recipients: </label>
+         <input type="text" id="company_recipients" name="company_recipients" required value="{{lor.company_recipients}}"></td>
+ </tr>
+   <tr>
+       <td><label for="resume">Resume: </label><br/>
+           <textarea id="resume" name="resume" required rows="8" cols="50">{{lor.resume}}</textarea>
+       </td>
+
+        <td><label for="transcript">Transcript: </label><br/>
+           <textarea id="transcript" name="transcript" required rows="8" cols="50">{{lor.transcript}}</textarea>
+       </td>
+   </tr>
+    <tr>
+        <td><label for="cover letter">Cover Letter: </label><br/>
+           <textarea id="cover letter" name="cv" required rows="8" cols="50">{{lor.cv}}</textarea>
+       </td>
+
+        <td><label for="additional info">Additional Info: </label><br/>
+           <textarea id="additional info" name="additional_info" required rows="8" cols="50">{{lor.additional_info}}</textarea>
+       </td>
+   </tr>
+
+</table>
+
+    <input type="hidden" name="id" value="{{ lor.id }}" />
+    <button type="submit" name="close_request" value="Close">Close</button>
+    <button type="submit" name="save_request" value="Save">Save</button>
+
+</form>
+</body>
+</html>
