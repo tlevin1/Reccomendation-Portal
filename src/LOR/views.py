@@ -16,7 +16,6 @@ from Authentication.models import UserRoles as Roles
 # display home page
 def index(request):
    cur_user = request.user
-   # print(cur_user.email)
    # determine number of requests user made and number of user's actions to write a recommendation
    if cur_user.is_authenticated:
        numRequests = LOR.objects.filter(requester_email=cur_user.email).count()
@@ -29,7 +28,6 @@ def index(request):
        "numRequests": numRequests,
        "numActions": numActions,
    }
-   # return HttpResponse('Letters of Recommendation index')
    return render(request, 'index.html', context)
 
 
@@ -64,32 +62,31 @@ def writer_view(request):
            sel_ids = request.POST.getlist('sel_box')
            # Check which button is pressed
            if 'Accept' in request.POST:
-               print('Accept Button pressed')
+               # print('Accept Button pressed')
                new_status = 'Accepted'
                invalid_sel = {'Completed', 'Withdrawn'}
                errmsg = 'Unable to accept a completed or withdrawn request'
                if change_status(sel_ids, invalid_sel, new_status):
                    messages.info(request, errmsg)
            elif 'Deny' in request.POST:
-               print('Deny Button pressed')
+               # print('Deny Button pressed')
                new_status = 'Denied'
                invalid_sel = {'Completed', 'Withdrawn'}
                errmsg = 'Unable to deny a withdrawn or completed request'
                if change_status(sel_ids, invalid_sel, new_status):
                    messages.info(request, errmsg)
            elif 'Complete' in request.POST:
-               print('Complete Button pressed')
+               # print('Complete Button pressed')
                new_status = 'Completed'
                invalid_sel = {'Withdrawn', 'Denied'}
                errmsg = 'Unable to complete a withdrawn or denied request'
                if change_status(sel_ids, invalid_sel, new_status):
                    messages.info(request, errmsg)
            elif 'Review' in request.POST:
-               print('Review Button pressed')
+               # print('Review Button pressed')
                # display full information of selected requests
                obj = LOR.objects.filter(id__in=sel_ids)
                return render(request, 'LOR/writer_review.html', {'objs': obj})
-               # return redirect('writer_review', ids=sel_ids)
 
    # for POST or GET, get logged in writer's requests sorted by due date
    sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
@@ -107,7 +104,7 @@ def requester_view(request):
 
    if request.method == 'POST':
        if 'New Request' in request.POST:
-           print('New Request Button pressed')
+           # print('New Request Button pressed')
            return redirect(view_enter_request)
 
        if not request.POST.getlist('sel_box'):
@@ -118,21 +115,19 @@ def requester_view(request):
            sel_ids = request.POST.getlist('sel_box')
            # Check which button is pressed
            if 'Review' in request.POST:
-               print('Review Button pressed')
+               # print('Review Button pressed')
                if len(sel_ids) > 1:
                    messages.info(request, 'Please only select one request to review/update')
                else:
                    # display the form with data from the selected request
-                   print(sel_ids)
                    lor = LOR.objects.get(id=sel_ids[0])
-                   print(lor)
                    context = {
                        'lor': lor
                    }
                    return render(request, 'updateLOR.html', context)
            elif 'Withdraw' in request.POST:
                # change status to withdrawn if status is not already completed
-               print('Withdraw Button pressed')
+               # print('Withdraw Button pressed')
                new_status = 'Withdrawn'
                invalid_sel = {'Completed'}
                errmsg = 'Unable to withdraw a completed request'
@@ -156,12 +151,9 @@ def updateLOR_view(request):
             # the Save button was pressed
             id = request.POST.get('id')
             lor = LOR.objects.get(id=id)
-            print(lor)
 
             # put fields into LOR and save LOR
-            lor.writer_email = request.POST.get('writer_email')
             lor.due_date = request.POST.get('due_date')
-            print(lor.due_date)
             lor.position = request.POST.get('position')
             lor.company_name = request.POST.get('company_name')
             lor.company_email = request.POST.get('company_email')

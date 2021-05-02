@@ -137,3 +137,32 @@ class RequesterViewTest(TestCase):
 
         # verify correct template is displayed
         self.assertTemplateUsed(response, 'updateLOR.html')
+
+    def test_request_is_updated(self):
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = [1]
+        context = {
+            "id": 1,
+            "position": "Analyst",
+            "due_date": "2021-12-25",
+            "additional_info": "tbd",
+            "company_name": "ToysRUs",
+            "company_website": "toysrus.com",
+            "company_email": "toysrus@gmail.com",
+            "company_recipients": "John Day, Sue Night",
+            "cv": "tbd",
+            "resume": "tbd",
+            "transcript": "tbd"
+        }
+
+        response = self.client.post('/updateLOR/', data=context)
+        lor = LOR.objects.get(id=1)
+        self.assertEqual(lor.position, "Analyst")
+        self.assertEqual(lor.additional_info, "tbd")
+        self.assertEqual(lor.company_name, "ToysRUs")
+        self.assertEqual(lor.company_website, "toysrus.com")
+        self.assertEqual(lor.company_email, "toysrus@gmail.com")
+        self.assertEqual(lor.company_recipients, "John Day, Sue Night")
+        self.assertEqual(lor.cv, "tbd")
+        self.assertEqual(lor.resume, "tbd")
+        self.assertEqual(lor.transcript, "tbd")
