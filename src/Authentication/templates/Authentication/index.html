@@ -1,22 +1,57 @@
 {% load socialaccount %}
 <html>
-    <head>
-        <title>Google Registration</title>
-        <style>
-            * {clear: both;}
-        </style>
-    </head>
-    <body>
-        {% if user.is_authenticated %}
-            <h1>{{ user.username }}, you are already signed in!</h1>
-            <form action='authLogOut' method='GET'>
-                <button name="logout-btn" type='submit'>Log Out</button>
-            </form>
-        {% else %}
-            <h1>Sign In to Continue</h1>
-            <a href="{% provider_login_url 'google' %}">
-                <button name="login-btn">Login with Google</button>
-            </a>
-        {% endif %}
-      </body>
+  <head>
+    <title>Google Registration</title>
+    <style>
+      .center {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+      }
+      button {
+        background-color: rgb(176, 245, 231);
+        border: 1px solid black;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 4px;
+      }
+      h1 {
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      {% if user.is_authenticated %}
+
+      <h2>Name: {{ user.first_name }} {{ user.last_name }}</h2>
+      <h2>Email: {{ user.email }}</h2>
+      <h2>Role: {{ user.get_role }}</h2>
+
+      <form action="goBack" method="GET">
+        <button name="home-btn" type="submit">Go Back</button>
+      </form>
+      <form action="authLogOut" method="GET">
+        <button name="logout-btn" type="submit">Log Out</button>
+      </form>
+      {% if user.is_staff %}
+      <form action="authIsAdmin" method="GET">
+        <button name="admin-btn" type="submit">Admin Console</button>
+      </form>
+      {% endif %} {% else %}
+
+      <h1>Sign In to Continue</h1>
+      <a href="{% provider_login_url 'google' %}">
+        <button name="login-btn">Login with Google</button>
+      </a>
+
+      {% endif %}
+    </div>
+  </body>
 </html>
