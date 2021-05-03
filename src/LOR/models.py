@@ -60,6 +60,10 @@ class LOR(models.Model):
     resume = models.TextField()
     transcript = models.TextField()
     additional_info = models.TextField()
+    requester_fk = models.ForeignKey(User, unique=True, blank=True, null=True, verbose_name='Requester',
+                                     related_name="related_lormodel_requester_id", on_delete=models.CASCADE)
+    writer_fk = models.ForeignKey(User, unique=True, blank=True, null=True, verbose_name='Writer',
+                                  related_name="related_lormodel_writer_id", on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.requester_email) + " " + str(self.writer_email) + " " + str(self.status) \

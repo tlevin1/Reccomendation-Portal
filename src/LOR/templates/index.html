@@ -19,9 +19,17 @@
     {% endif %}
   </a></h5></h4>
 
-  {% if user.is_authenticated %}
+  {% comment %} {% if user.is_authenticated %}
       <h3 style="color:green;">Your requests: {{ numRequests }}<br/>
       Your writer actions: {{ numActions }}</h3>
+  {% endif %} {% endcomment %}
+
+  {% if user.is_authenticated %}
+    {% if user.get_role == 'Requester' %}
+        <h3 style="color:green;">Your requests: {{ numRequests }}<br/></h3>
+    {% elif user.get_role == 'Writer' %}
+        <h3 style="color:green;">Your writer actions: {{ numActions }}<br/></h3>
+    {% endif %}
   {% endif %}
 
   <h2>What is a letter of recommendation?</h2>

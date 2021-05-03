@@ -9,5 +9,16 @@ from .models import *
 # Create your views here.
 @login_required
 def logoff(request):
-    logout(request)
-    return redirect('../../')
+    if request.method == 'GET':
+        logout(request)
+        return redirect('../../')
+
+@login_required
+def rediradmin(request):
+    if request.method == 'GET':
+        return redirect('../../admin/')
+
+@login_required
+def goback(request):
+    if request.method == 'GET':
+        return redirect('../../')
