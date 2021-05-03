@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
-from .models import LOR, Req_a
+from .models import LOR, Req_a, RequestModel
 from datetime import datetime
 from django import http
 from . import models
@@ -18,6 +18,7 @@ def index(request):
    cur_user = request.user
    # determine number of requests user made and number of user's actions to write a recommendation
    if cur_user.is_authenticated:
+       #numRequests = RequestModel.objects.filter(requester_fk=cur_user).count()
        numRequests = LOR.objects.filter(requester_email=cur_user.email).count()
        numActions = LOR.objects.filter(writer_email=cur_user.email).count()
        print(numRequests, numActions)

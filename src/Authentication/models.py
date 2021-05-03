@@ -47,7 +47,7 @@ class LorUser(AbstractUser):
         return str(self.last_name)
 
     def get_role(self):
-        return self.role
+        return (UserRoles(self.role)).label
 
 
 class LorRequest(models.Model):
