@@ -109,3 +109,60 @@ class RequesterViewTest(TestCase):
         # test that request can be withdrawn (id=1 has valid Pending status)
         lor = LOR.objects.get(id=sel_box[0])
         self.assertEqual(lor.status, "Withdrawn")
+
+    def test_review_multiple_requests(self):
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = [1, 3]
+        context = {
+            "Review": "Review",
+            "sel_box": sel_box
+        }
+
+        response = self.client.post('/requester/', data=context)
+        self.assertEqual(response.status_code, 200)
+
+        #test error message is sent if attempting to review more than one request
+        self.assertContains(response, 'Please only select one request to review/update')
+
+    def test_review_single_request(self):
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = [1]
+        context = {
+            "Review": "Review",
+            "sel_box": sel_box
+        }
+
+        response = self.client.post('/requester/', data=context)
+        self.assertEqual(response.status_code, 200)
+
+        # verify correct template is displayed
+        self.assertTemplateUsed(response, 'updateLOR.html')
+
+    def test_request_is_updated(self):
+        login = self.client.login(username='r_user1', password='justapwd12')
+        sel_box = [1]
+        context = {
+            "id": 1,
+            "position": "Analyst",
+            "due_date": "2021-12-25",
+            "additional_info": "tbd",
+            "company_name": "ToysRUs",
+            "company_website": "toysrus.com",
+            "company_email": "toysrus@gmail.com",
+            "company_recipients": "John Day, Sue Night",
+            "cv": "tbd",
+            "resume": "tbd",
+            "transcript": "tbd"
+        }
+
+        response = self.client.post('/updateLOR/', data=context)
+        lor = LOR.objects.get(id=1)
+        self.assertEqual(lor.position, "Analyst")
+        self.assertEqual(lor.additional_info, "tbd")
+        self.assertEqual(lor.company_name, "ToysRUs")
+        self.assertEqual(lor.company_website, "toysrus.com")
+        self.assertEqual(lor.company_email, "toysrus@gmail.com")
+        self.assertEqual(lor.company_recipients, "John Day, Sue Night")
+        self.assertEqual(lor.cv, "tbd")
+        self.assertEqual(lor.resume, "tbd")
+        self.assertEqual(lor.transcript, "tbd")
