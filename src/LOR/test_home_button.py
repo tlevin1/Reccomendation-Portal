@@ -11,8 +11,26 @@ from django.test import Client
 from django.shortcuts import render, redirect
 from selenium.webdriver.support import expected_conditions as EC
 import time
+from Authentication.models import UserRoles as Roles
 
 class HomeViewButtonTest(TestCase):
+    def setUp(self):
+        ad_user = User.objects.create_user(username='ad0',
+                                           email='ad@umbc.edu', password='justapwd12',
+                                           role=Roles.ADMIN)
+        ad_user.save()
+        rq_user = User.objects.create_user(username='rq',
+                                           email='rq@umbc.edu', password='justapwd12',
+                                           role=Roles.REQUESTER)
+        rq_user.save()
+        wr_user0 = User.objects.create_user(username='wr0',
+                                            email='wr0@umbc.edu', password='justapwd12',
+                                            role=Roles.WRITER)
+        wr_user0.save()
+        wr_user1 = User.objects.create_user(username='wr1',
+                                            email='wr1@umbc.edu', password='justapwd12',
+                                            role=Roles.WRITER)
+        wr_user1.save()
     #cookies code
     # def test_use_django_selenium_login_to_force_login(self):
     #     user = self.client.login(username = "admin", password='pass')
@@ -25,20 +43,25 @@ class HomeViewButtonTest(TestCase):
 
 
     def test_login_using_google(self):
-
+        #ad_login = self.client.login(username='rq', password='justapwd12')
         # This example requires Selenium WebDriver 3.13 or newer
         with webdriver.Chrome() as driver:
             wait = WebDriverWait(driver, 10)
+
             driver.get("http://127.0.0.1:8000/Authentication/")
+            #time.sleep(15)
             #driver.find_element_by_css_selector("input[name='Home'][value='Home']").click()
             driver.find_element_by_tag_name("button").click()
             wait = WebDriverWait(driver, 5)
-            driver.find_element_by_class_name('Xb9hP').find_element_by_name('identifier').send_keys('throwaway384745@gmail.com'+Keys.ENTER)
-            driver.implicitly_wait(5)
-
-            wait.until(EC.presence_of_element_located((By.ID, "Passwd"))).send_keys(Keys.ENTER)
+            username = driver.find_element_by_class_name('Xb9hP').find_element_by_name('identifier')
+            username.send_keys('throwaway384745@gmail.com'+Keys.ENTER)
+            time.sleep(2000)
+            password = driver.find_element_by_class_name('Xb9hP').find_element_by_name('password')
+            password.send_keys('hello'+Keys.ENTER)
+            driver.implicitly_wait(25)
+            #wait.until(EC.presence_of_element_located((By.ID, "Passwd"))).send_keys(Keys.ENTER)
             #WebDriverWait(driver,5).until(presence_of_element_located((By.NAME, "password")))
-            time.sleep(700)
+            #time.sleep(700)
             #wait = WebDriverWait(driver, 120)
             # driver.find_element_by_class_name('rFrNMe ze9ebf YKooDc q9Nsuf zKHdkd sdJrJc').find_element_by_tag_name('input').send_keys('throwawayworld12' + Keys.ENTER)
 
