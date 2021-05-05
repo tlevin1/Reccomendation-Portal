@@ -16,6 +16,7 @@ from Authentication.models import UserRoles as Roles
 # display home page
 def index(request):
    cur_user = request.user
+
    # print(cur_user.email)
    # determine number of requests user made and number of user's actions to write a recommendation
    if cur_user.is_authenticated:
@@ -57,6 +58,10 @@ def writer_view(request):
    print("Logged in user is ", cur_user)
 
    if request.method == 'POST':
+       # added for home
+       if 'Home' in request.POST:
+           print('clicked home')
+           return redirect(index)
        # Get the list of ids associated with selected table rows
        if not request.POST.getlist('sel_box'):
            messages.info(request, 'Nothing Selected')
@@ -92,6 +97,8 @@ def writer_view(request):
                return render(request, 'LOR/writer_review.html', {'objs': obj})
                # return redirect('writer_review', ids=sel_ids)
 
+
+
    # for POST or GET, get logged in writer's requests sorted by due date
    sorted_lors = LOR.objects.filter(writer_email=cur_user.email).order_by("due_date")
    context = {"sorted_lors": sorted_lors}
@@ -107,6 +114,10 @@ def requester_view(request):
    print("Logged in user is ", cur_user)
 
    if request.method == 'POST':
+       # added for home
+       if 'Home' in request.POST:
+           print('clicked home')
+           return redirect(index)
        # Get the list of ids associated with selected table rows
        if 'New Request' in request.POST:
            print('New Request Button pressed')
@@ -126,8 +137,14 @@ def requester_view(request):
                new_status = 'Withdrawn'
                invalid_sel = {'Completed'}
                errmsg = 'Unable to withdraw a completed request'
+
                if change_status(sel_ids, invalid_sel, new_status):
                    messages.info(request, errmsg)
+               # added for home
+           elif 'Home' in request.POST:
+               print('clicked home')
+               obj = LOR.objects.filter(id__in=sel_ids)
+               return render(request, 'LOR/index.html', {'objs': obj})
 
    # for POST or GET, get logged in user's requests sorted by due date
    sorted_lors = LOR.objects.filter(requester_email=cur_user.email).order_by("due_date")
