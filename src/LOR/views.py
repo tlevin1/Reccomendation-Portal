@@ -57,6 +57,10 @@ def writer_view(request):
    if request.method == 'POST':
        # Get the list of ids associated with selected table rows
        if not request.POST.getlist('sel_box'):
+           # added for home
+           if 'Home' in request.POST:
+               print('clicked home')
+               return redirect(index)
            messages.info(request, 'Nothing Selected')
            # print('Nothing selected')
        else:
@@ -109,6 +113,10 @@ def requester_view(request):
            return redirect(view_enter_request)
 
        if not request.POST.getlist('sel_box'):
+           # added for home
+           if 'Home' in request.POST:
+               print('clicked home')
+               return redirect(index)
            messages.info(request, 'Nothing selected')
            # print('Nothing selected')
        else:
