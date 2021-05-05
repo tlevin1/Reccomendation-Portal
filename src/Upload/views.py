@@ -11,7 +11,7 @@ def upload_file(request):
         form = Uploadform(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('upload_file')
+            return redirect('requester_view')
         else:
             form = Uploadform()
 # check form sending in is valid, and save form if valid
@@ -20,7 +20,14 @@ def upload_file(request):
 
 
 def upload_view(request):
-    Uploads = Upload.objects.all()
+
+    Uploads = Upload.objects.filter(name = request.user)
+#show all of the uploads from database
+    return render(request, 'Upload/uploadview.html', {'uploads': Uploads})
+
+def upload_view2(request):
+
+    Uploads = Upload.objects.filter(send_to = request.user)
 #show all of the uploads from database
     return render(request, 'Upload/uploadview.html', {'uploads': Uploads})
 

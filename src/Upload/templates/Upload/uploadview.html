@@ -12,6 +12,7 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
+        <th scope="col">Send To</th>
       <th scope="col">Type</th>
       <th scope="col">Download</th>
       <th scope="col">Delete</th>
@@ -22,6 +23,7 @@
     <tr>
          {% for upload in uploads %}
       <th scope="row">{{upload.name}}</th>
+         <td>{{upload.send_to}}</td>
       <td>{{upload.type}}</td>
       <td> <a href="{{upload.pdf.url }}" class="btn btn-primary btn-sm">Download</a></td>
       <td><form method="post" action="{% url 'delete_upload' upload.pk %}">

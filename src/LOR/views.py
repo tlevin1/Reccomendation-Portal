@@ -72,7 +72,7 @@ def writer_view(request):
            elif 'Deny' in request.POST:
                # print('Deny Button pressed')
                new_status = 'Denied'
-               invalid_sel = {'Completed', 'Withdrawn'}
+               invalid_sel = {'wCompleted', 'Withdrawn'}
                errmsg = 'Unable to deny a withdrawn or completed request'
                if change_status(sel_ids, invalid_sel, new_status):
                    messages.info(request, errmsg)
