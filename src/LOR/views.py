@@ -20,8 +20,8 @@ def index(request):
    # print(cur_user.email)
    # determine number of requests user made and number of user's actions to write a recommendation
    if cur_user.is_authenticated:
-       numRequests = RequestModel.objects.filter(requester_fk=cur_user).count()
-       #numRequests = LOR.objects.filter(requester_email=cur_user.email).count()
+       #numRequests = RequestModel.objects.filter(requester_fk=cur_user).count()
+       numRequests = LOR.objects.filter(requester_email=cur_user.email).count()
        numActions = LOR.objects.filter(writer_email=cur_user.email).count()
        print(numRequests, numActions)
    else:
@@ -140,7 +140,7 @@ def requester_view(request):
 
                if change_status(sel_ids, invalid_sel, new_status):
                    messages.info(request, errmsg)
-              
+
 
 
    # for POST or GET, get logged in user's requests sorted by due date
