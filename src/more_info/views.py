@@ -19,6 +19,6 @@ def writer_more_info(request):
     return render(request, 'more_info/moreinfo.html',{'infoform': Infoform})
 
 def view_more_info(request):
-    info = moreinfo.objects.all()
+    info = moreinfo.objects.filter(send_to = request.user)
 
     return render(request, 'more_info/viewmoreinfo.html', {'infos': info})

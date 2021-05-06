@@ -4,5 +4,5 @@ from .models import Upload
 class Uploadform(forms.ModelForm):
     class Meta:
         model = Upload
-        fields = ('name', 'type', 'pdf')
+        fields = ('name','send_to', 'type', 'pdf')
         #uses model Upload

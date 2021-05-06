@@ -56,6 +56,75 @@ class TestViews(TestCase):
         self.assertEquals(self.upload.pdf, 'Upload/pdf/ER_DIAGRAM.pdf')
         #testing to see if variable are still correct
 
+    def test_upload_post2(self):
+        self.upload = Upload.objects.create(
+        name= 'thuan',
+        send_to='Jay',
+        type = 'pdf',
+        pdf = 'Upload/pdf/ER_DIAGRAM.pdf',
+        )
+        self.upload.save()
+        #create new object model upload and saving it
+
+        self.upload2 = Upload.objects.latest('name')
+        self.upload22 = Upload.objects.latest('send_to')
+        self.upload3 = Upload.objects.latest('type')
+        self.upload4 = Upload.objects.latest('pdf')
+        self.assertEquals(self.upload2.name, 'thuan')
+        self.assertEquals(self.upload22.send_to, 'Jay')
+        self.assertEquals(self.upload3.type, 'pdf')
+        self.assertEquals(self.upload4.pdf, 'Upload/pdf/ER_DIAGRAM.pdf')
+        #pulling lastest object model and testing to see if its the same, this is for the updated model
+
+        response = self.client.post(reverse('upload_file'), {
+            'name' : 'thuan',
+            'type' : 'transcript',
+            'pdf' : 'Upload/pdf/ER_DIAGRAM.pdf',
+
+        })
+        #post request with a new object
+        self.assertEquals(response.status_code, 200)
+        #testing to see if Post was succesful
+        self.assertEquals(self.upload.name, 'thuan')
+        self.assertEquals(self.upload.type, 'pdf')
+        self.assertEquals(self.upload.pdf, 'Upload/pdf/ER_DIAGRAM.pdf')
+        #testing to see if variable are still correct
+
+    def test_upload_post_filter(self):
+        self.upload = Upload.objects.create(
+            name='thuan',
+            send_to='Jacob',
+            type='pdf',
+            pdf='Upload/pdf/ER_DIAGRAM.pdf',
+        )
+        self.upload.save()
+        # create new object model upload and saving it
+
+        self.upload = Upload.objects.filter(name='thuan')
+
+        self.assertEquals(self.upload[0].name, 'thuan')
+        self.assertEquals(self.upload[0].send_to, 'Jacob')
+        self.assertEquals(self.upload[0].type, 'pdf')
+        self.assertEquals(self.upload[0].pdf, 'Upload/pdf/ER_DIAGRAM.pdf')
+        #testing filter object because there is a filter model in view
+
+    def test_upload_post_filter2(self):
+            self.upload = Upload.objects.create(
+                name='thuan',
+                send_to='Jacob',
+                type='pdf',
+                pdf='Upload/pdf/ER_DIAGRAM.pdf',
+            )
+            self.upload.save()
+            # create new object model upload and saving it
+
+            self.upload = Upload.objects.filter(send_to='Jacob')
+
+            self.assertEquals(self.upload[0].name, 'thuan')
+            self.assertEquals(self.upload[0].send_to, 'Jacob')
+            self.assertEquals(self.upload[0].type, 'pdf')
+            self.assertEquals(self.upload[0].pdf, 'Upload/pdf/ER_DIAGRAM.pdf')
+            # testing filter object because there is a filter model in view
     def test_delete_upload_post(self):
         self.upload = Upload.objects.create(
         name= 'Jacob',
@@ -66,6 +135,18 @@ class TestViews(TestCase):
         response = self.client.post(reverse('delete_upload', args=[1]))
         self.assertEquals(response.status_code, 200)
         # testing to see if Post was succesful
+
+    def test_delete_upload_post(self):
+            self.upload = Upload.objects.create(
+                name='Jacob',
+                send_to='thuan',
+                type='pdf',
+                pdf='Upload/pdf/ER_DIAGRAM.pdf',
+            )
+            self.upload.save()
+            response = self.client.post(reverse('delete_upload', args=[1]))
+            self.assertEquals(response.status_code, 200)
+            # testing to see if Post was succesful for updated model
 
 class TestURL(TestCase):
 
@@ -97,4 +178,17 @@ class Testmodels(TestCase):
                 self.assertEquals(self.upload.type, 'transcript')
                 self.assertEquals(self.upload.pdf, 'Upload/pdf/ER_DIAGRAM.pdf')
                 # test to see if all objects variable are correct
+
+            def test_model_upload2(self):
+                self.upload = Upload.objects.create(
+                    name='Joshua',
+                    send_to='thuan',
+                    type='transcript',
+                    pdf='Upload/pdf/ER_DIAGRAM.pdf',
+                )
+                self.assertEquals(self.upload.name, 'Joshua')
+                self.assertEquals(self.upload.send_to, 'thuan')
+                self.assertEquals(self.upload.type, 'transcript')
+                self.assertEquals(self.upload.pdf, 'Upload/pdf/ER_DIAGRAM.pdf')
+                # this is the edited model, testing to see if still work correctly
 

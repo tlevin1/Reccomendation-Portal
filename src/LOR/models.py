@@ -39,6 +39,7 @@ class RequestModel(models.Model):
     writer_fk = models.ForeignKey(User, unique=True, blank=True, null=True, verbose_name='Writer',
                                   related_name="related_requestmodel_writer_id", on_delete=models.CASCADE)
 
+
     def __str__(self):
         return str(self.requester) + " " + str(self.writer_name) + " " + str(self.status) + " " + str(self.due_date)
 
@@ -73,8 +74,8 @@ class LOR(models.Model):
 class Req_a(models.Model):
     name = models.CharField(max_length=100)
     answer = models.CharField(max_length=100, blank=True)
-    R_date = models.DateField(blank=True)
-    A_date = models.DateField(default=datetime.now())
+    R_date = models.DateField(blank=True ,null=True)
+    A_date = models.DateField(default='',blank=True ,null=True)
 
 class UpdateRequest(models.Model):
     position = models.CharField(max_length=100, blank=True, null=True)
