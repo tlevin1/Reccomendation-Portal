@@ -12,9 +12,10 @@ urlpatterns = [
     path('request/', views.writer_req, name="writer_req"),
     #path('save/', views.view_save_request, name='save'),
     path('writer_rev/', views.writer_review, name="writer_review"),
-  path('req_view/', views.requester_review, name="requester_review"),
-  path('req_page', views.requester_view_particular_request, name="request_page"),
-  path('Authentication', TemplateView.as_view(template_name="Authentication/index.html"), name='Authentication'),
+    path('req_view/', views.requester_review, name="requester_review"),
+    path('req_page', views.requester_view_particular_request, name="request_page"),
+    path('Authentication/', TemplateView.as_view(template_name="Authentication/index.html"), name='Authentication'),
+    path('updateLOR/', views.updateLOR_view, name="updateLOR_view"),
 ]
 
 

@@ -18,13 +18,13 @@ Status = [
 
 # Create your models here.
 class RequestModel(models.Model):
-    requester = models.CharField(max_length=100, blank=False, null=False, default="")
-    requester_email = models.EmailField(max_length=200, blank=True, null=True)
+    #requester = models.CharField(max_length=100, blank=False, null=False, default="")
+    #requester_email = models.EmailField(max_length=200, blank=True, null=True)
     request_date = models.DateField(max_length=100, blank=False, null=False, default=now)
     position = models.CharField(max_length=100, blank=True, null=True)
     due_date = models.DateField(max_length=100, blank=False, null=False)
-    writer_name = models.CharField(max_length=100, blank=False, null=False, choices=Proffesors)
-    writer_email = models.EmailField(max_length=200, blank=True, null=True)
+    #writer_name = models.CharField(max_length=100, blank=False, null=False, choices=Proffesors)
+    #writer_email = models.EmailField(max_length=200, blank=True, null=True)
     company_name = models.CharField(max_length=100, blank=False, null=False, default= "")
     company_website = models.URLField(max_length=100, blank=True, null=True)
     company_email = models.EmailField(max_length=100, blank=True, null=True)
@@ -38,6 +38,7 @@ class RequestModel(models.Model):
                                      related_name="related_requestmodel_requester_id", on_delete=models.CASCADE)
     writer_fk = models.ForeignKey(User, unique=True, blank=True, null=True, verbose_name='Writer',
                                   related_name="related_requestmodel_writer_id", on_delete=models.CASCADE)
+
 
     def __str__(self):
         return str(self.requester) + " " + str(self.writer_name) + " " + str(self.status) + " " + str(self.due_date)
@@ -60,6 +61,10 @@ class LOR(models.Model):
     resume = models.TextField()
     transcript = models.TextField()
     additional_info = models.TextField()
+    requester_fk = models.ForeignKey(User, unique=True, blank=True, null=True, verbose_name='Requester',
+                                     related_name="related_lormodel_requester_id", on_delete=models.CASCADE)
+    writer_fk = models.ForeignKey(User, unique=True, blank=True, null=True, verbose_name='Writer',
+                                  related_name="related_lormodel_writer_id", on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.requester_email) + " " + str(self.writer_email) + " " + str(self.status) \
@@ -69,8 +74,8 @@ class LOR(models.Model):
 class Req_a(models.Model):
     name = models.CharField(max_length=100)
     answer = models.CharField(max_length=100, blank=True)
-    R_date = models.DateField(blank=True)
-    A_date = models.DateField(default=datetime.now())
+    R_date = models.DateField(blank=True ,null=True)
+    A_date = models.DateField(default='',blank=True ,null=True)
 
 class UpdateRequest(models.Model):
     position = models.CharField(max_length=100, blank=True, null=True)
