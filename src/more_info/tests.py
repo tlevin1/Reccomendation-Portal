@@ -64,6 +64,45 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
 
     # testing to see if Post was succesful
+    def test_moreinfo_post_filter(self):
+        self.moreinfo = moreinfo.objects.create(
+            name='Thuan',
+            send_to='Josh',
+            date='2021-08-21',
+            email='ttran009@gmail.com',
+            type='Transcript',
+            description='I need to see transcript to finish request'
+        )
+        self.moreinfo.save()
+
+        response = moreinfo.objects.filter(name='Thuan')
+        self.assertEquals(response[0].name, 'Thuan')
+        self.assertEquals(response[0].send_to, 'Josh')
+        self.assertEquals(response[0].email, 'ttran009@gmail.com')
+        self.assertEquals(response[0].type, 'Transcript')
+        self.assertEquals(response[0].description, 'I need to see transcript to finish request')
+
+    # testing to see if filter test work
+    def test_moreinfo_post_filter2(self):
+        self.moreinfo = moreinfo.objects.create(
+            name='Thuan',
+            send_to='Josh',
+            date='2021-08-21',
+            email='ttran009@gmail.com',
+            type='Transcript',
+            description='I need to see transcript to finish request'
+        )
+        self.moreinfo.save()
+
+        response =  moreinfo.objects.filter(send_to='Josh')
+        self.assertEquals(response[0].name, 'Thuan')
+        self.assertEquals(response[0].send_to, 'Josh')
+        self.assertEquals(response[0].email, 'ttran009@gmail.com')
+        self.assertEquals(response[0].type, 'Transcript')
+        self.assertEquals(response[0].description, 'I need to see transcript to finish request')
+
+    # testing to see if filter test work
+
 class TestURL(TestCase):
 
         def test_moreinfo_url(self):
