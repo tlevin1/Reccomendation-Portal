@@ -10,14 +10,10 @@ class RequestForm(forms.ModelForm):
     class Meta:
         model = RequestModel
         fields = [
-            'requester',
-            'requester_email',
+            'requester_fk',
             'position',
             'due_date',
-            'requester_fk',
             'writer_fk',
-            'writer_name',
-            'writer_email',
             'company_name',
             'company_website',
             'company_email',
