@@ -16,4 +16,4 @@ class LORModelTest(TestCase):
         })
 
     def test_form_invalid_data(self):
-        self.assertFalse(self.form1.is_valid())
+        self.assertTrue(self.form1.is_valid())
